@@ -16,17 +16,18 @@ class Solution {
         ListNode k = head;
 
         while(i!= null && j!=null){
-            ListNode temp = new ListNode();
+            
             if(i.val<j.val){
-                temp.val = i.val;
+                k.next=i;
+                k=k.next;
                 i=i.next;
             }
             else{
-                temp.val=j.val;
+                k.next=j;
+                k=k.next;
                 j=j.next;
             }
-            k.next=temp;
-            k=temp;
+            
         }
 
         if(i==null)k.next=j;
