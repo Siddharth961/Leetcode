@@ -30,12 +30,12 @@ public class Solution {
 
         if(isCycle==false) return null;
         else{
-            ListNode temp = head;
-            while(i!=temp){
+            j = head;
+            while(i!=j){
                 i=i.next;
-                temp=temp.next;
+                j=j.next;
             }
-            return temp;
+            return j;
         }
 
     }
