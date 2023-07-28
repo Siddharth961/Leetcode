@@ -31,9 +31,10 @@ class Solution {
                 ctail.next = j;
                 j.prev = ctail;
                 i.child = null;
+                i = j;
             }
 
-            i=i.next;
+            else i=i.next;
         }
         if(i.next==null&&i.child!=null){
                 
@@ -42,7 +43,7 @@ class Solution {
                 i.child=null;
                 return connector(i.next);
             }
-            
+
         return i;//returning the tail
     }
 }
