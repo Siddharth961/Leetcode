@@ -8,10 +8,10 @@ class Solution {
             if(st.size()!=0 && st.peek()==c) st.pop();
             else st.push(c);
         }
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         while(st.size()!=0){
-            ans = st.pop() + ans;
+            ans.insert(0,st.pop());
         }
-        return ans;
+        return ans.toString();
     }
 }
