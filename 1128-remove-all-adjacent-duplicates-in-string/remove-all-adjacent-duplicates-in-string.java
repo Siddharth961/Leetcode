@@ -10,8 +10,8 @@ class Solution {
             else st.push(c);
         }
         String ans = "";
-        for(char ch : st){
-            ans += ch;
+        while(st.size()!=0){
+            ans = st.pop() + ans;
         }
         return ans;
     }
