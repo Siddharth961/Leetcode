@@ -4,17 +4,12 @@ class Solution {
         Stack<Integer> st = new Stack<>();
 
         for(int i=nums2.length-1; i>=0; i--){
+            while(st.size()>0 && st.peek()<nums2[i]){
+                st.pop();
+            }
             if(st.size()==0) great[i] = -1;
-            else if(st.peek()>nums2[i]){
-                great[i] = st.peek();
-                
-            }
-            else{
-                while(st.size()>0 && st.peek()<nums2[i]) st.pop();
+            else great[i] = st.peek();
 
-                if(st.size()>0) great[i] = st.peek();
-                else great[i] = -1;
-            }
 
             st.push(nums2[i]);
         }
