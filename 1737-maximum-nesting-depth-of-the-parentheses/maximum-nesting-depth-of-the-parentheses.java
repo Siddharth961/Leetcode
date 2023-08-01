@@ -1,6 +1,6 @@
 class Solution {
     public int maxDepth(String s) {
-        Stack<Character> st = new Stack<>();
+       
         int max = 0;
         int count=0;
 
@@ -9,11 +9,9 @@ class Solution {
 
             if(c=='('){
                 count++;
-                st.push(c);
             }
             else if(c==')'){
                 count--;
-                st.pop();
             }
             if(max<count)max = count;
             
