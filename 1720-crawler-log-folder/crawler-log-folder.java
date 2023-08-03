@@ -2,11 +2,11 @@ class Solution {
     public int minOperations(String[] logs) {
         int count = 0;
 
-        for(int i=0; i<logs.length; i++){
-            if(logs[i].equals("../")){
+        for(String s : logs){
+            if(s.equals("../")){
                 if(count>0)count--;
             }
-            else if(logs[i].equals("./")){}
+            else if(s.equals("./")){}
             else count++;
         }
         return count;
