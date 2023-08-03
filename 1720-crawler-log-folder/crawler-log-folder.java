@@ -6,7 +6,7 @@ class Solution {
             if(logs[i].equals("../")){
                 if(count>0)count--;
             }
-            else if(logs[i].equals("./")) continue;
+            else if(logs[i].equals("./")){}
             else count++;
         }
         return count;
