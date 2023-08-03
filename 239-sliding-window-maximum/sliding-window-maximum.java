@@ -13,10 +13,15 @@ class Solution {
         int[]ans  = new int[nums.length-k+1];
         int j=0;
         for(int i=0; i<ans.length; i++){
-         if(j<i)j=i;
+         if(j>=i+k || j<i)j=i;
          while(nger[j]<i+k) j=nger[j];
+         
          ans[i] = nums[j];
+
+         
         }
+
+        
         
         return ans;
     }
