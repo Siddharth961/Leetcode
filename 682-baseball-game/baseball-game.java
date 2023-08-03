@@ -13,8 +13,8 @@ class Solution {
             }
             else if(s.equals("+")){
                 int v1 = st.pop();
-                int v2 = st.pop();
-                st.push(v2);
+                int v2 = st.peek();
+                
                 st.push(v1);
                 
                 st.push(v1+v2);
