@@ -24,9 +24,7 @@ class Solution {
         }
         
         int ans = 0;
-        for(int a : st){
-            ans += a;
-        }
+        while(st.size()!=0) ans += st.pop();
 
         return ans;
     }
