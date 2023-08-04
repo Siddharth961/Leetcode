@@ -4,6 +4,7 @@ class Solution {
         int i=0;
         while(i<sb.length()){
             if(i==0 && sb.charAt(i)=='#')sb.delete(i,i+1);
+            
             else if(sb.charAt(i)=='#'){
                 sb.delete(i-1,i+1);
                 i--;
