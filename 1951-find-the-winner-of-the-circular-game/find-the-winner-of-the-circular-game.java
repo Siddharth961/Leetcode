@@ -16,6 +16,6 @@ class Solution {
             q.remove();
         }
         
-        return q.remove();
+        return q.peek();
     }
 }
