@@ -1,31 +1,15 @@
 class DataStream {
 
-    Queue<Integer> q = new LinkedList<>();
-    int val=0;
-    int k = 0;
-
+    int val, main, count;
     public DataStream(int value, int k) {
         val = value;
-        this.k = k;
+        main = k;
+        count = 0;
     }
-    
+
     public boolean consec(int num) {
-        
-        if(num==val){
-            if(q.size()==k) return true;
-            q.add(val);
-            if(q.size()==k) return true;
-
-        }
-        else q.clear();
-
-        
-        return false;
+        if (num == val) count++;
+        else count = 0;
+        return count >= main;
     }
 }
-
-/**
- * Your DataStream object will be instantiated and called as such:
- * DataStream obj = new DataStream(value, k);
- * boolean param_1 = obj.consec(num);
- */
