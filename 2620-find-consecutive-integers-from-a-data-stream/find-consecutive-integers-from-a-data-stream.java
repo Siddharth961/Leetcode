@@ -1,6 +1,8 @@
 class DataStream {
 
-    int val, k, count;
+    int val;
+    int k;
+    int count;
     public DataStream(int value, int k) {
         val = value;
         this.k = k;
