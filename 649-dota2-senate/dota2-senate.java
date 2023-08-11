@@ -11,7 +11,7 @@ class Solution {
 
         
 
-        while(r_count<q.size() && d_count<q.size()){
+        while(r_count*2<q.size() && d_count*2<q.size()){
             while(d_count!=0 && q.peek()=='R'){
                 q.remove();
                 d_count--;
