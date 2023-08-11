@@ -1,39 +1,39 @@
+
 class ProductOfNumbers {
 
-    Node head;
+    ArrayList<Integer> arr = new ArrayList<Integer>();
+    int pro=1;
 
 
     public ProductOfNumbers() {
-        
+        arr.add(1);
     }
     
     public void add(int num) {
-        Node temp = new Node(num);
-        temp.next = head;
-        head = temp;
+        if(num==0){
+            arr = new ArrayList<>();
+            pro =  1;
+            return;
+        }
+        pro = pro*num;
+        arr.add(pro);
     }
     
     public int getProduct(int k) {
-        Node ptr = head;
-        int pro=1;
-        while(k>0){
-            pro = pro*ptr.val;
-            ptr = ptr.next;
-            k--;
+
+        if(arr.size()<k) return 0;
+
+        else if(arr.size()==k) return pro;
+        
+        else{
+        int idx = arr.size()-k-1; 
+        return pro/arr.get(idx);
         }
 
-        return pro;
+        
     }
 }
 
-class Node{
-    int val;
-    Node next;
-
-    Node(int val){
-        this.val = val;
-    }
-}
 
 /**
  * Your ProductOfNumbers object will be instantiated and called as such:
