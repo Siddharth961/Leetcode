@@ -24,20 +24,11 @@ class Solution {
     }
 
     public static int gcd(int a,int b){
-        int min = Math.min(a,b);
-
-        if(a==b)return a;
-        else if(min!=a && a%min==0) return min;
-        else if(min!=b && b%min==0) return min;
-
-        int gcd = 0;
-
-        for(int i=1; i<min; i++){
-            
-            if(a%i==0 && b%i==0) gcd = i;
-
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-
-        return gcd;
+        return a;
     }
 }
