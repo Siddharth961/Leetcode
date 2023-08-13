@@ -24,9 +24,10 @@ class Solution {
     }
 
     public static int gcd(int a,int b){
-         while(a != b) {
-            if(a > b) a -= b;
-            else b -= a;
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
         return a;
     }
