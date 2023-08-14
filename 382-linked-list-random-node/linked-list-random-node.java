@@ -9,32 +9,17 @@
  * }
  */
 class Solution {
-    int size=0;
-    ListNode head;
-
+    ArrayList<Integer>list=new ArrayList<>();
     public Solution(ListNode head) {
-        this.head = head;
-        ListNode i = head;
-        while(i!=null){
-            i=i.next;
-            size++;
+        while(head!=null){
+            list.add(head.val);
+            head=head.next;
         }
     }
     
     public int getRandom() {
-
-        int n = (int)Math.floor(Math.random()*size);
-
-        int count = 0;
-        ListNode i = head;
-        while(count!=n){
-            i=i.next;
-            count++;
-        }
-
-        return i.val;
-        
-
+        double random=Math.random()*list.size();
+        return list.get((int)random);
     }
 }
 
