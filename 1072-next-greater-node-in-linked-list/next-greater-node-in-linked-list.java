@@ -10,37 +10,31 @@
  */
 class Solution {
     public int[] nextLargerNodes(ListNode head) {
-        ListNode i = head;
-        int idx = 0;
+        ListNode ptr = head;
 
         Stack<Integer> st = new Stack<>();
+        ArrayList<Integer> al = new ArrayList<>();
 
-        while(i!=null){
-            i=i.next;
-            idx++;
+        while(ptr!=null){
+            al.add(ptr.val);
+            ptr = ptr.next;
         }
 
-        int[]arr = new int[idx];
-        idx=0;
-        i=head;
+        int[]arr = new int[al.size()];
+       
+       for(int i=al.size()-1; i>=0 ; i--){
 
-        while(i!=null){
-            while(st.size()!=0 && arr[st.peek()] < i.val ){
-                arr[st.peek()]=i.val;
-                st.pop();
+           while(st.size()!=0 && al.get(st.peek())<= al.get(i)){
+               st.pop();
             }
 
-            arr[idx] = i.val;
-            st.push(idx);
+           if(st.size()==0) arr[i] = 0;
+           else arr[i] = al.get(st.peek());
+           st.push(i);
+       }
+       
 
-            i=i.next;
-            idx++;
-        }
-
-        while(st.size()!=0){
-            arr[st.peek()]=0;
-            st.pop();
-        }
+        
 
         return arr;
     }
