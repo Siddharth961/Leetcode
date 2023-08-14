@@ -14,15 +14,23 @@ class Solution {
         int idx = 0;
 
         Stack<Integer> st = new Stack<>();
-        ArrayList<Integer> al = new ArrayList<>();
 
         while(i!=null){
-            while(st.size()!=0 && al.get(st.peek()) < i.val ){
-                al.set(st.peek(), i.val);
+            i=i.next;
+            idx++;
+        }
+
+        int[]arr = new int[idx];
+        idx=0;
+        i=head;
+
+        while(i!=null){
+            while(st.size()!=0 && arr[st.peek()] < i.val ){
+                arr[st.peek()]=i.val;
                 st.pop();
             }
 
-            al.add(i.val);
+            arr[idx] = i.val;
             st.push(idx);
 
             i=i.next;
@@ -30,11 +38,9 @@ class Solution {
         }
 
         while(st.size()!=0){
-            al.set(st.peek(),0);
+            arr[st.peek()]=0;
             st.pop();
         }
-
-        int[] arr = al.stream().mapToInt(j -> j).toArray();
 
         return arr;
     }
