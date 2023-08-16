@@ -10,39 +10,43 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        int k = lists.length;
-        ListNode head = new ListNode(Integer.MAX_VALUE);
-        ListNode ptr=head;
-        ListNode min = head;
-        int j=0;
+       
         int count=0;
+        ListNode ans = null;
 
-        boolean[]end = new boolean[k];
 
-
-        while(count!=k){
-            min = head;
-            for(int i=0; i<k; i++){
-                if(end[i]==true) continue ;
-                if(lists[i]==null){
-                    end[i] = true;
-                    count++;
-                    continue;
-                }
-
-                if(lists[i].val < min.val){
-                    min = lists[i];
-                    j = i;
-                }
-            }
-
-            if(count==k) break;
-
-            ptr.next = min;
-            ptr = ptr.next;
-            lists[j] = lists[j].next;
+        while(count!=lists.length){
+            ans = mergeTwoLists(ans,lists[count]);
+            count++;
         }
 
-        return head.next;
+        return ans;
+    }
+
+     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode i = list1;
+        ListNode j = list2;
+        ListNode head = new ListNode();
+        ListNode k = head;
+
+        while(i!= null && j!=null){
+            
+            if(i.val<j.val){
+                k.next=i;
+                k=k.next;
+                i=i.next;
+            }
+            else{
+                k.next=j;
+                k=k.next;
+                j=j.next;
+            }
+            
+        }
+
+        if(i==null)k.next=j;
+        else if(j==null)k.next=i;
+
+        return head=head.next;
     }
 }
