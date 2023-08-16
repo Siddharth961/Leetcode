@@ -22,14 +22,14 @@ class Solution {
         ptr=head;
         ListNode temp = null;
 
-        int count=0;
+        int count=1;
         int i=0;
 
         while(ptr!=null){
-            
+
             arr[i] = ptr;
-            count = 0;
-            while(count<(n/k)-1){
+            count = 1;
+            while(count<(n/k)){
                 ptr = ptr.next;
                 count++;
             }
