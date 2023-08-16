@@ -17,7 +17,6 @@ class Solution {
             n++;
             ptr = ptr.next;
         }
-            // System.out.println(n);
 
 
         ptr=head;
@@ -27,16 +26,13 @@ class Solution {
         int i=0;
 
         while(ptr!=null){
-            System.out.println(ptr.val);
-
+            
             arr[i] = ptr;
             count = 0;
             while(count<(n/k)-1){
                 ptr = ptr.next;
                 count++;
-            // System.out.println(count);
             }
-            System.out.println(i+" "+n%k);
 
             if(i<(n%k) && n/k>0) ptr = ptr.next;
 
