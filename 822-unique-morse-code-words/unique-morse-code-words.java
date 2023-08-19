@@ -7,8 +7,8 @@ class Solution {
         for(String s : words){
             StringBuilder sb = new StringBuilder();
             for(char i: s.toCharArray()){
-                int x = i - 97;
-                sb.append(alpha[x]);
+                
+                sb.append(alpha[i - 97]);
             }
             mp.put(sb.toString(),true);
         }
