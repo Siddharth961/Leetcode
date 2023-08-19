@@ -12,13 +12,13 @@ class Solution {
 
         while(ans.length()!=s.length()){
 
-            for(int i=0; i<arr.length; i++){
+            for(int i=0; i<26; i++){
                 if(arr[i]==0) continue;
                 ans.append((char)(i+'a'));
                 arr[i]--;
 
             }
-            for(int i=arr.length-1; i>=0; i--){
+            for(int i=25; i>=0; i--){
                 if(arr[i]==0) continue;
                 ans.append((char)(i+'a'));
                 arr[i]--;
