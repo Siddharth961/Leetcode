@@ -16,14 +16,10 @@ class Solution {
         for(char c : tm.keySet()){
             arr[i] = c;
             i++;
-        }
-
-        
+        }       
 
       
-        StringBuilder ans = new StringBuilder();
-
-        
+        StringBuilder ans = new StringBuilder();       
 
         while(ans.length()!=s.length()){
 
@@ -39,8 +35,6 @@ class Solution {
                 tm.put(arr[i], tm.get(arr[i])-1);
 
             }
-            // System.out.print(arr[i]);
-
         }
         return ans.toString();
     }
