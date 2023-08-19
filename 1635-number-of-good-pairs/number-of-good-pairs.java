@@ -2,9 +2,7 @@ class Solution {
     public int numIdenticalPairs(int[] nums) {
 
         HashMap<Integer,Integer> mp = new HashMap<>();
-
         int count = 0;
-
         for(int i : nums){
             if(mp.containsKey(i)==false){
                 mp.put(i,1);}
@@ -14,8 +12,6 @@ class Solution {
             }
 
         }
-
-        return count;
-        
+        return count;        
     }
 }
