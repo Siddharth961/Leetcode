@@ -5,12 +5,12 @@ class Solution {
 
         HashMap<String,Boolean>mp = new HashMap<>();
         for(String s : words){
-            String sb = "";
-            for(int i=0; i<s.length(); i++){
-                int x = s.charAt(i) - 97;
-                sb += alpha[x];
+            StringBuilder sb = new StringBuilder();
+            for(char i: s.toCharArray()){
+                int x = i - 97;
+                sb.append(alpha[x]);
             }
-            mp.put(sb,true);
+            mp.put(sb.toString(),true);
         }
         return mp.size();
     }
