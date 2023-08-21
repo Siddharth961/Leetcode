@@ -10,10 +10,7 @@ class Solution {
                 i++;
 
             }
-
-
             if(i==123)break; 
-
         }
 
         System.out.print(mp);
