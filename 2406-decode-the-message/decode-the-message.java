@@ -2,11 +2,11 @@ class Solution {
     public String decodeMessage(String key, String message) {
         HashMap<Character,Character> mp = new HashMap<>();
 
-        char i = 'a';
+        int i = 97;
         for(char c: key.toCharArray()){
             if(c==' ')continue;
             if(mp.containsKey(c)==false){
-                mp.put(c,i);
+                mp.put(c, (char)i);
                 i++;
 
             }
