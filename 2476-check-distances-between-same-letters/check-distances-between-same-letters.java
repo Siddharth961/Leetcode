@@ -11,14 +11,11 @@ class Solution {
             idx = c - 'a';
 
             if(arr[idx]==-1) arr[idx]=i;
-            else arr[idx] = i - arr[idx] - 1 ;
-            
+            else arr[idx] = i - arr[idx] - 1 ;            
         }
-
         for(int i=0; i<26; i++){
             if(arr[i]!=-1 && arr[i]!=distance[i]) return false;
         }
-
 
 
         return true;
