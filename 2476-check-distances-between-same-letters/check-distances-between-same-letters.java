@@ -12,7 +12,6 @@ class Solution {
                 d = i - mp.get(c) - 1;
                 if(distance[idx]!=d) return false;
             }
-            System.out.println(mp);
         }
 
 
