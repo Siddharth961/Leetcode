@@ -19,14 +19,14 @@ class Solution {
             }
             mp.remove(k);
         }
+        int val=0;
 
-        
-        for(var e : mp.keySet()){
-            
-            while(mp.get(e)>0){
-                ans[i] = e;
+        for(var e : mp.entrySet()){
+            val = e.getValue();
+            while(val>0){
+                ans[i] = e.getKey();
                 i++;
-                mp.put(e, mp.get(e)-1);                                 
+                val--;                
             }
         }
 
