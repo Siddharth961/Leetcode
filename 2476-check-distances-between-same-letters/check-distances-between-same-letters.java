@@ -1,17 +1,22 @@
 class Solution {
     public boolean checkDistances(String s, int[] distance) {
-        HashMap<Character, Integer> mp = new HashMap<>();
-        int idx=0,d=0;
+        int[]arr = new int[26];
+
+        Arrays.fill(arr,-1);
+        int idx=0;
+        char c=' ';
 
         for(int i=0; i<s.length(); i++){
-            char c = s.charAt(i);
+            c = s.charAt(i);
+            idx = c - 'a';
 
-            if(mp.containsKey(c)==false) mp.put(c,i);
-            else{
-                idx = (int)(c - 'a');
-                d = i - mp.get(c) - 1;
-                if(distance[idx]!=d) return false;
-            }
+            if(arr[idx]==-1) arr[idx]=i;
+            else arr[idx] = i - arr[idx] - 1 ;
+            
+        }
+
+        for(int i=0; i<26; i++){
+            if(arr[i]!=-1 && arr[i]!=distance[i]) return false;
         }
 
 
