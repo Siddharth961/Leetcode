@@ -9,6 +9,8 @@ class Solution {
            else{
                ans[0] = mp.get(val);
                ans[1] = i;
+               return ans;
+
            }
         }
         return ans;
