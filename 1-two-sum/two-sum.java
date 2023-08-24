@@ -4,7 +4,6 @@ class Solution {
         int[]ans=new int[2];
         int val=0;
         for(int i=0; i<nums.length; i++){
-
            val = target - nums[i];
            if(mp.containsKey(val)==false) mp.put(nums[i],i);
            else{
@@ -12,7 +11,6 @@ class Solution {
                ans[1] = i;
            }
         }
-        System.out.print(mp);
         return ans;
     }
 }
