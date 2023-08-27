@@ -13,8 +13,10 @@ class Solution {
             arr2[b]++;
         }
 
+        int x=0;
+
         for(int i=0; i<26; i++){
-            int x = Math.abs(arr1[i]-arr2[i]);
+            x = Math.abs(arr1[i]-arr2[i]);
             if(x>3) return false;
         }
 
