@@ -9,8 +9,6 @@ class Solution {
             m1.put(str,s);
             m2.put(str,m2.getOrDefault(str,0)+1); 
         }
-        System.out.println(m1);
-        System.out.println(m2);
          for(String s1:m2.keySet()){
             if(m2.get(s1)==1)return m1.get(s1);
         }
@@ -28,8 +26,6 @@ class Solution {
             sb.append(b-a);
             sb.append(" ");
         }
-
-        System.out.println(sb);
 
         return sb.toString();
     }
