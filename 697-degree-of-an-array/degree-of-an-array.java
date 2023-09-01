@@ -20,11 +20,9 @@ class Solution {
 
         int ans=nums.length;
 
-        for(var e : mp.entrySet()){
-            if(e.getValue()[2]==max){
-                int[]arr = e.getValue();
-                
-                if(ans>(arr[1]-arr[0]+1)) ans=arr[1]-arr[0]+1;
+        for(var e : mp.values()){
+            if(e[2]==max){                               
+                if(ans>(e[1]-e[0]+1)) ans=e[1]-e[0]+1;
             }
         }
 
