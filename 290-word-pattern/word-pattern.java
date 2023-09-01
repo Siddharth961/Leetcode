@@ -21,14 +21,8 @@ class Solution {
                 if(mp.get(c).equals(st[i])==false)return false;
             }
 
-            System.out.println(mp);
-
             i++;
-
-
         }
-
-        System.out.println(mp);
 
         return true;
     }
