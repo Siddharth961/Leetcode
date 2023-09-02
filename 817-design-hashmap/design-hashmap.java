@@ -84,7 +84,7 @@ class MyHashMap {
     }
 
     public int hashfunc(int i){
-        return (i*i)%capacity;
+        return i%capacity;
     }
 
     public int Search(LinkedList<Node>ll, int k){
