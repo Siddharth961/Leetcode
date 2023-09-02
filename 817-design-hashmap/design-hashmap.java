@@ -16,14 +16,31 @@ class MyHashMap {
     LinkedList<Node>[] arr;
 
     public MyHashMap() {
+        init();
+        
+    }
+
+    public void init(){
         arr = new LinkedList[capacity];
 
         for(int i=0; i<arr.length; i++){
             arr[i] = new LinkedList<>();
 
         }
+    }
 
-        
+    public void rehash(){
+        LinkedList<Node>[] old = arr;
+        capacity = 2*capacity;
+        size=0;
+
+        init();
+
+        for(var i: old){
+            for(var j : i){
+                put(j.key, j.val);
+            }
+        }
     }
     
     public void put(int key, int value) {
@@ -40,6 +57,9 @@ class MyHashMap {
             Node temp = arr[bi].get(idx);
             temp.val = value;
         }
+
+        if(size >= capacity*load_factor) rehash();
+        
     }
     
     public int get(int key) {
