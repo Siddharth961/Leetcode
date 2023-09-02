@@ -16,7 +16,6 @@ class MyHashMap {
     LinkedList<Node>[] arr;
 
     public MyHashMap() {
-
         arr = new LinkedList[capacity];
 
         for(int i=0; i<arr.length; i++){
@@ -69,7 +68,6 @@ class MyHashMap {
     }
 
     public int Search(LinkedList<Node>ll, int k){
-            System.out.println(1);
 
         for(int i=0; i<ll.size(); i++){
             if(ll.get(i).key==k) return i;
