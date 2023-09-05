@@ -5,11 +5,9 @@ class Solution {
 
         for(int i=0; i<groups.length; i++){
             if(mp.containsKey(groups[i])==false){
-                List<Integer> ll = new LinkedList<>();
-                mp.put(groups[i],ll);
-                ll.add(i);
+                mp.put(groups[i], new LinkedList<>());
             }
-            else mp.get(groups[i]).add(i);
+             mp.get(groups[i]).add(i);
             
             if(groups[i]== mp.get(groups[i]).size() ){
                 ans.add(mp.get(groups[i]));
