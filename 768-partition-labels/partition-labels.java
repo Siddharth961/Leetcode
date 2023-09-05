@@ -9,9 +9,8 @@ class Solution {
 
         for(int i=0; i<s.length(); i++){
             int x = mp.get(s.charAt(i)); 
-
             if(part<x) part=x;
-
+            
             count++;
 
             if(i==part){
