@@ -4,6 +4,7 @@ class Solution {
         int x = 0;
         for(int i : nums){
             st.add(i);
+            if(i<=9) continue;
             x=0;
             while(i!=0){
                 x = x*10 + i%10;
