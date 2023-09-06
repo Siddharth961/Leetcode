@@ -1,18 +1,21 @@
 class Solution {
     public int countDistinctIntegers(int[] nums) {
-        HashSet<Integer> st = new HashSet<>();
-
-        for(int i : nums){
-            st.add(i);
-            int x=0;
-            while(i!=0){
-                x = x*10 + i%10;
-                i = i/10;
+        Set<Integer> unique = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            int n = nums[i];
+            if (n > 9) {
+                int r = 0;
+                while (n > 0) {
+                    r += n % 10;
+                    if (n > 9) {
+                        r *= 10;
+                    }
+                    n /= 10;
+                }
+                unique.add(r);
             }
-            System.out.println(x);
-            st.add(x);
+            unique.add(nums[i]);
         }
-
-        return st.size();
+        return unique.size();
     }
 }
