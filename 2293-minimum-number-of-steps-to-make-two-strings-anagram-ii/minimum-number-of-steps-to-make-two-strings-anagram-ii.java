@@ -1,21 +1,19 @@
 class Solution {
     public int minSteps(String s, String t) {
-        HashMap<Character , Integer> mp = new HashMap<>();
+        int [] arr = new int[26];
 
         for(char c : s.toCharArray()){
-            if(mp.containsKey(c)) mp.put( c , mp.get(c)+1);
-            else mp.put(c,1);
+            arr[c - 'a'] ++;
         }
 
         for(char c : t.toCharArray()){
-            if(mp.containsKey(c)) mp.put( c , mp.get(c)-1);
-            else mp.put(c,-1);
+            arr[c - 'a'] --;
         }
         
         int count = 0;
 
-        for(var e : mp.values()){
-            count += Math.abs(e);
+        for(int i=0; i<26; i++){
+            count += Math.abs(arr[i]);
         }
 
         return count;
