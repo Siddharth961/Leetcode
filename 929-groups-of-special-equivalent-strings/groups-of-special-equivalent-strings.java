@@ -1,5 +1,6 @@
 class Solution {
     public int numSpecialEquivGroups(String[] words) {
+        if(words.length==1) return 1;
         HashSet<String> st = new HashSet<>();
 
         for(String s : words){
