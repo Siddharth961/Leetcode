@@ -1,36 +1,32 @@
 class Cashier {
-
-    HashMap<Integer, Integer> mp = new HashMap<>();
-    int n=0;
-    int max = 0;
-    int dis = 0;
+    private final int[] prices;
+    private final int n;
+    private final int discount;
+    private int customerNumber;
 
     public Cashier(int n, int discount, int[] products, int[] prices) {
-        for(int i=0; i<products.length; i++){
-            mp.put(products[i] , prices[i]);
-        }
+        this.prices = new int[200];
 
-        max = n;
-        dis = discount;
+        for(int i = 0; i < products.length; ++i)
+            this.prices[products[i] - 1] = prices[i];
 
+        this.n = n;
+        this.discount = discount;
+        this.customerNumber = 1;
     }
     
     public double getBill(int[] product, int[] amount) {
-        double bill = 0.0;
+        double sum = 0;
 
-        for(int i=0; i<product.length; i++){
-            
-            bill += amount[i]*mp.get(product[i]);
-        }
-        n++;
+        for(int i = 0; i < product.length; ++i)
+            sum += this.prices[product[i] - 1] * amount[i];
 
-        if(n==max){
-            bill -= (bill*dis)/100;
-            n=0;
-        }
+        if(this.customerNumber != 0 && this.customerNumber % n == 0)
+            sum *= (double) (100 - this.discount) / 100;
 
-        return bill;
+        this.customerNumber++;
 
+        return sum;
     }
 }
 
