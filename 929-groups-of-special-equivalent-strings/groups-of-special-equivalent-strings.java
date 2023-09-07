@@ -13,12 +13,9 @@ class Solution {
     public String mark(String s){
         byte[][] arr = new byte[2][26];
 
-        for(int i=0; i<s.length(); i+=2){
-             arr[0][s.charAt(i)-'a']++;
-        }
-
-        for(int i=1; i<s.length(); i+=2){
-            arr[1][s.charAt(i)-'a']++;
+        for(int i=0; i<s.length(); i++){
+            if(i%2==0) arr[0][s.charAt(i)-'a']++;
+            else arr[1][s.charAt(i)-'a']++;
         }
 
         StringBuilder sb = new StringBuilder();
