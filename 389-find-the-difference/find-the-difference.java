@@ -1,15 +1,14 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        char[] arr = new char[26];
+       int num = 0;
 
         for(char c : s.toCharArray()){
-            arr[c-'a']++;
+           num -= c;
         }
         for(char c : t.toCharArray()){
-            if(arr[c-'a']==0) return c;
-            arr[c-'a']--;
+            num += c;
         }
 
-        return ' ';
+        return (char)num;
     }
 }
