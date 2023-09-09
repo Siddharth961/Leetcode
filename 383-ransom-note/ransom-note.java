@@ -1,18 +1,15 @@
 class Solution {
     public boolean canConstruct(String ran, String mag) {
-        HashMap<Character , Integer> mp = new HashMap<>();
+        int[]arr = new int[26];
 
-        for(char c : ran.toCharArray()) mp.put(c , mp.getOrDefault(c,0)+1);
+        for(char c : mag.toCharArray()) arr[c-'a']++;
 
-        for(char c : mag.toCharArray()){
-            if(mp.containsKey(c)){
-                mp.put(c, mp.get(c)-1);
-                if(mp.get(c)==0) mp.remove(c);
-            }
-            if(mp.size()==0) return true;
+        for(char c : ran.toCharArray()){
+            if(arr[c-'a']==0) return false;
+            arr[c-'a']--;
         }
 
-        return false;
+        return true;
 
     }
 }
