@@ -1,22 +1,15 @@
 class Solution {
     public int firstUniqChar(String s) {
-        HashMap<Character, Integer> mp = new HashMap<>();
+       int ans = s.length();
 
-        for(int i=0; i<s.length(); i++){
-            char c = s.charAt(i);
+       for(char c='a'; c<='z'; c++ ){
+           int idx = s.indexOf(c);
+           if(idx!=-1 && idx==s.lastIndexOf(c)){
+               if(ans>idx) ans=idx;
+           }
+       }
 
-            if(mp.containsKey(c)) mp.put(c, s.length());
-            else mp.put(c,i);
-        }
-
-        int ans=s.length();
-
-        for(var e : mp.values()){
-            if(ans>e)ans=e;
-        }
-
-        if(ans<s.length()) return ans;
-
-        return -1;
+       if(ans==s.length()) return -1;
+       else return ans;
     }
 }
