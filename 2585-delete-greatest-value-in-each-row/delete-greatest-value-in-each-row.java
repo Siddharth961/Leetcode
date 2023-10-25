@@ -1,6 +1,7 @@
 class Solution {
     public int deleteGreatestValue(int[][] grid) {
-        for(int i=0; i<grid.length; i++) Arrays.sort(grid[i]);
+        for(int[]arr : grid) Arrays.sort(arr);
+
 
         int j = grid[0].length-1;
         int ans = 0;
@@ -11,7 +12,6 @@ class Solution {
             for(int[]arr : grid){
                 if(max<arr[j]) max = arr[j];
             }
-            System.out.println(max);
 
             ans += max;
             j--;
