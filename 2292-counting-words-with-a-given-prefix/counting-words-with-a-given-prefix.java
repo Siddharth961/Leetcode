@@ -1,20 +1,19 @@
 class Solution {
     public int prefixCount(String[] words, String pref) {
-        int original=0;
-        for(int i=0;i<words.length;i++){
-            String sw=words[i];
-            int index=0;
-            int count=0;
-            while(index<sw.length() && index<pref.length()){
-                if(sw.charAt(index)==pref.charAt(index)){
-                    count++;
-                }
-                if(count==pref.length()){
-                    original++;
-                }
-                index++;
+        int ans = 0;
+        int i =  0;
+
+        for(String s : words){
+            if(s.length()<pref.length()) continue;
+            i=0;
+            while(i<s.length() && i<pref.length()){
+                if(s.charAt(i) != pref.charAt(i)) break;
+                i++;
             }
+
+            if(i==pref.length()) ans++;
         }
-        return original ;
+
+        return ans;
     }
 }
