@@ -5,7 +5,6 @@ class Solution {
             st.add(i);
             if(st.size()== candyType.length/2) break;
         }
-        if( (candyType.length/2) <= st.size() ) return candyType.length/2;
-        else return st.size();
+        return st.size();
     }
 }
