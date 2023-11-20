@@ -2,13 +2,13 @@ class Solution {
     List<List<String>> al = new ArrayList<>();
     public List<List<String>> solveNQueens(int n) {
         boolean[][]board = new boolean[n][n];
-        ways(0,0,"", n,board);
+        ways(0,0, n,board);
         return al;
 
         
     }
 
-    public void ways(int r, int qsf, String psf,int n, boolean[][]board){
+    public void ways(int r, int qsf,int n, boolean[][]board){
 
         if(r>=n){
             if(qsf==n) ans(board);
@@ -21,7 +21,7 @@ class Solution {
 
             board[r][c]=true;
 
-            ways(r+1, qsf+1, psf+r+c+" ", n, board);          
+            ways(r+1, qsf+1, n, board);          
 
             board[r][c]=false; 
 
