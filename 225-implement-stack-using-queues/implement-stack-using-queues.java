@@ -1,10 +1,9 @@
 class MyStack {
 
-    Queue<Integer> q = new LinkedList<>();
+    Queue<Integer> q ;
 
     public MyStack() {
-        
-
+        q = new ArrayDeque<>();
     }
     
     public void push(int x) {
@@ -18,6 +17,7 @@ class MyStack {
     
     public int pop() {
         return q.remove();
+        
     }
     
     public int top() {
@@ -25,8 +25,8 @@ class MyStack {
     }
     
     public boolean empty() {
-        if(q.size()!=0) return false;
-        else return true;
+        return q.size()==0;
+        
     }
 }
 
