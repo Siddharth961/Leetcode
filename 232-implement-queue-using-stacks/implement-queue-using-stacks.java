@@ -1,40 +1,37 @@
-class MyQueue {  
-
-    Stack<Integer>st = new Stack<>();
-    Stack<Integer>helper = new Stack<>(); 
+class MyQueue {
+    Stack<Integer> main;
+    Stack<Integer> help;
 
     public MyQueue() {
-        
+        main = new Stack<>();
+        help = new Stack<>();
     }
     
     public void push(int x) {
-        
-        while(st.size()!=0){
-            helper.push(st.pop()); 
+
+        while(main.size()>0){
+            help.push(main.pop());
         }
 
-        helper.push(x);
+        main.push(x);
 
-        while(helper.size()!=0){
-            st.push(helper.pop());
-        }
-
-        
+        while(help.size()>0){
+            main.push(help.pop());
+        }        
     }
     
     public int pop() {
-        if(st.size()==0) return -1;
-        return st.pop();
+
+        return main.pop();
+        
     }
     
     public int peek() {
-        if(st.size()==0) return -1;
-        return st.peek();
+        return main.peek();
     }
     
     public boolean empty() {
-        if(st.size()>0) return false;
-        else return true;
+        return main.size()==0;
     }
 }
 
