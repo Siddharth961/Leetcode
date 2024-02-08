@@ -6,7 +6,6 @@ class Solution {
         int[][]dp = new int[al.size()][n+1];
 
         for(int i=0; i<al.size(); i++){
-                System.out.print(al.get(i)+"----------");
             
             for(int j=1; j<=n; j++){
                 if(i==0){
