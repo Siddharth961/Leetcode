@@ -1,31 +1,26 @@
 class Solution {
     public String countAndSay(int n) {
-        StringBuilder sb = new StringBuilder("1");
-        sb =  get_ans(2,sb,n);
-        return sb.toString();
-    }
-
-    public StringBuilder get_ans(int num, StringBuilder s, int n){
-        if(num>n) return s;
-
-        int i = 0;
-        StringBuilder sb = new StringBuilder();
-
-        while(i<s.length()){
-
-            char c = s.charAt(i);
-            int count = 0;
-
-            while(i<s.length() && s.charAt(i) == c ){
-                i++;
-                count++;
-            }
-
-            sb.append(count+""+c+"");
+        String s = "1";
+        for (int i = 2; i <= n; i++) {
+            s = countAndAdd(s);
         }
-
-        // System.out.println(n + "---------" + sb);
-
-        return get_ans(num+1, sb, n);
+        return s;
+    }
+    public String countAndAdd(String s) {
+        StringBuilder str = new StringBuilder();
+        char c = s.charAt(0);
+        int count = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == c) count++;
+            else {
+                str.append(count);
+                str.append(c);
+                c = s.charAt(i);
+                count = 1;
+            }
+        }
+        str.append(count);
+        str.append(c);
+        return str.toString();
     }
 }
