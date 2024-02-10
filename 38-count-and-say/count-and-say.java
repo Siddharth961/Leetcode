@@ -21,7 +21,8 @@ class Solution {
                 count++;
             }
 
-            sb.append(count+""+c+"");
+            sb.append(count);
+            sb.append(c);
         }
 
         // System.out.println(n + "---------" + sb);
