@@ -1,34 +1,30 @@
 class Solution {
     public int countSubstrings(String s) {
-        int count = 0;
-        int l=0;
-        int r=0;
+        int n = s.length();
+        boolean[][] palindrome = new boolean[n][n];
+        int ans = 0;
 
-        char[]arr = s.toCharArray();
+        for(int i=0;i<n;i++) {
+            palindrome[i][i] = true;
+            ans++;
+        }
 
-        for(int i=0; i<arr.length; i++){
-            l=i;
-            r=i;
-            while(l>=0 && r<arr.length){
-                if(arr[l]==arr[r]){
-                    count++;
-                    l--;
-                    r++;
-                }
-                else break;
-            }
-            l=i;
-            r=i+1;
-            while(l>=0 && r<arr.length){
-                if(arr[l]==arr[r]){
-                    count++;
-                    l--;
-                    r++;
-                }
-                else break;
+        for(int i=0;i<n-1;i++) {
+            if(s.charAt(i) == s.charAt(i+1)) {
+                palindrome[i][i+1] = true;
+                ans++;
             }
         }
 
-        return count;
+        for(int len=3;len<=n;len++) {
+            for(int i=0;i<n-len+1;i++) {
+                if(s.charAt(i) == s.charAt(i+len-1) && palindrome[i+1][i+len-2]) {
+                    palindrome[i][i+len-1] = true;
+                    ans++;
+                }
+            }
+        }
+
+        return ans;
     }
 }
