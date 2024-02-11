@@ -17,7 +17,7 @@ class Solution {
         }
 
         String s = arr[digits.charAt(idx) - '0' -1];
-        //System.out.println(s);
+       
 
         for(char c : s.toCharArray()){
             sb.append(c);
