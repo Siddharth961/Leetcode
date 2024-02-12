@@ -21,8 +21,6 @@ class Solution {
             }
         }
 
-        System.out.println(nums[smallest]);
-
         if(nums[smallest] == target) return smallest;
 
         if(target <= nums[nums.length-1]){
