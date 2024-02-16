@@ -15,12 +15,13 @@ class Solution {
             }
         }
 
-        for(int i=1; i<freq.length; i++){
-           
-                int countreduce = Math.min( k/i , freq[i]);
-                count -= countreduce;
-                k -= countreduce*i;
-                if(k<=i) break;                
+        int countreduce = 0;
+
+        for(int i=1; i<freq.length; i++){           
+            countreduce = Math.min( k/i , freq[i]);
+            count -= countreduce;
+            k -= countreduce*i;
+            if(k<=i) break;                
            
         }
 
