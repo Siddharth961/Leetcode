@@ -1,7 +1,7 @@
 class Solution {
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
         Arrays.sort(arr);
-        int[]freq = new int[arr.length+1];
+        int[]freq = new int[k+1];
         int len = 1; 
         int count = 0; //number of unique elements
         for(int i=0; i<arr.length; i++){
@@ -10,7 +10,7 @@ class Solution {
             }
             else{
                 count++;
-                freq[len]++;
+                if(len<=k)freq[len]++;
                 len = 1;
             }
         }
