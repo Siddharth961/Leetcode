@@ -20,7 +20,7 @@ class Solution {
                 int countreduce = Math.min( k/i , freq[i]);
                 count -= countreduce;
                 k -= countreduce*i;
-                // if(k<=i) break;                
+                if(k<=i) break;                
            
         }
 
