@@ -44,16 +44,13 @@ class Solution {
 
 
         int x = sb.charAt(0) - '0';
-        // System.out.print(sb +"---------");
-        // System.out.print(x+" ");
-
-
+        
         for(int i = 1; i<sb.length(); i++){
             x = x*10 + (sb.charAt(i) - '0');
-        // System.out.print(x+" ");
+        
         }
         
-        // System.out.println();
+        
 
         ans += x;
     }
