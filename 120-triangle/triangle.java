@@ -10,7 +10,7 @@ class Solution {
     }
 
     public int get_ans(List<List<Integer>> tri, int r, int c, int[][]dp){
-        System.out.println(r+" "+c);  
+        // System.out.println(r+" "+c);  
 
         if(r==tri.size()) return 0;
         if(dp[r][c] != Integer.MAX_VALUE) return dp[r][c];
