@@ -10,7 +10,7 @@ class Solution {
     }
 
     public int get_ans(List<List<Integer>> tri, int r, int c, int[][]dp){
-        // System.out.println(r+" "+c);  
+        
 
         if(r==tri.size()) return 0;
         if(dp[r][c] != Integer.MAX_VALUE) return dp[r][c];
@@ -22,8 +22,7 @@ class Solution {
         int y = get_ans(tri, r+1, c+1, dp);
 
         int ans  = al.get(c) + Math.min(x , y);    
-        // if(r==3 && c==2) System.out.println(al + "-----"+ans);
-        // System.out.println(r+" "+c+"-----"+ans);   
+         
         dp[r][c] = ans;
         return ans; 
     }
