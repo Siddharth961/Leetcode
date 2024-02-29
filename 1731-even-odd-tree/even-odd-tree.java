@@ -27,9 +27,6 @@ class Solution {
         TreeNode temp;
 
         while(q.size()>1){
-
-            // System.out.println(q);
-
             if(q.peek().val==-1){
                 level++;
                 if(level % 2 == 0 ) last_val = -1;
@@ -44,7 +41,6 @@ class Solution {
 
                 if( level % 2 == 0){
                     if(temp.left != null){
-            // System.out.println((temp.left.val % 2 == 0) +" "+ (last_val>= temp.left.val));
                         if(temp.left.val % 2 == 0 || last_val>= temp.left.val) return false;
                         last_val = temp.left.val;
                          q.add(temp.left);
@@ -76,7 +72,6 @@ class Solution {
                 }
             }
 
-            // q.add(minus);
         }
 
         return true;
