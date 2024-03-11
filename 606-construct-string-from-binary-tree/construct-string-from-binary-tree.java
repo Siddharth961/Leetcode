@@ -14,33 +14,34 @@
  * }
  */
 class Solution {
+    StringBuilder sb = new StringBuilder();
+
     public String tree2str(TreeNode root) {
-        return get_ans(root);
+         get_ans(root);
+         return sb.toString();
     }
 
-    public String get_ans(TreeNode root){
-        if(root==null) return "";
+    public void get_ans(TreeNode root){
+        if(root==null) return ;
         
 
-        StringBuilder sb = new StringBuilder();
         sb.append(root.val);
 
         if(root.left!=null || root.right!= null){
 
-            String left = get_ans(root.left);
             sb.append('(');
-            sb.append(left);
+             get_ans(root.left);            
             sb.append(')');
         }
 
-        String right = get_ans(root.right);
-        if(right.length()>0){
+        
+        if(root.right!=null){
             sb.append('(');
-            sb.append(right);
+            get_ans(root.right);
             sb.append(')');
 
         }
 
-        return sb.toString();
+        
     }
 }
