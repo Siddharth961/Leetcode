@@ -20,14 +20,18 @@ class Solution {
 
     public String get_ans(TreeNode root){
         if(root==null) return "";
-        if(root.left==null && root.right==null) return root.val + "";
+        
 
         StringBuilder sb = new StringBuilder();
         sb.append(root.val);
-        String left = get_ans(root.left);
-        sb.append('(');
-        sb.append(left);
-        sb.append(')');
+
+        if(root.left!=null || root.right!= null){
+
+            String left = get_ans(root.left);
+            sb.append('(');
+            sb.append(left);
+            sb.append(')');
+        }
 
         String right = get_ans(root.right);
         if(right.length()>0){
