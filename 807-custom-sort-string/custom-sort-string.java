@@ -12,10 +12,10 @@ class Solution {
             }
         }
 
-        for(char c : s.toCharArray()){
-            while(arr[c-'a']>0){
-                sb.append(c);
-                arr[c-'a']--;
+        for(int i=0; i<26; i++){
+            while(arr[i]>0){
+                sb.append((char)(i+97));
+                arr[i]--;
             }
 
         }
