@@ -18,7 +18,6 @@ class Solution {
 
             if(prefix==0) max = Math.max(max, i+1);
         }
-        System.out.println(mp);
         
         return max;
     }
