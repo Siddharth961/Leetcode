@@ -52,7 +52,9 @@ class Solution {
                     while(curr!=null && (curr.left==null && curr.right==null)){
                         curr = curr.next;
                     }
-                        shifted = true;
+                    
+                    shifted = true;
+
                     if(curr!=null){
                         next_child = curr.left!=null ? curr.left : curr.right;
                         curr_child.next = next_child;
