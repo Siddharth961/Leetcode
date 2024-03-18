@@ -6,10 +6,12 @@ class Solution {
 
         int arrows =0;
         int i = 0;
+        int[]temp;
+        int min = 0;
         while( i<points.length){
 
-            int[]temp = points[i];
-            int min = temp[1];
+            temp = points[i];
+            min = temp[1];
 
             while(i+1<points.length && temp[1]>=points[i+1][0]){
 
