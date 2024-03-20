@@ -44,9 +44,7 @@ class Solution {
     }
 
     public TreeNode leftmost(TreeNode root){
-        if(root.left==null) return root;
-        
-
-        return leftmost(root.left);
+        while(root.left!=null) root = root.left;
+        return root;
     }
 }
