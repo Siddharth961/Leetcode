@@ -9,17 +9,19 @@ class Solution {
         mp.clear();
         int i=0;
         int j=0;
+
+        int[]count = new int[nums.length+1];
+        int curr=0;
         int ans=0;
 
         while(j<nums.length){
-            mp.put( nums[j], mp.getOrDefault(nums[j], 0) + 1 );
+            if(count[ nums[j] ]==0) curr++;
+            count[ nums[j] ]++;
 
-            while(mp.size()>k && i<=j ){
+            while(curr>k && i<=j ){
                 
-                mp.put(nums[i], mp.get(nums[i])-1 );
-                if(mp.get(nums[i])==0)mp.remove(nums[i]);
-
-                
+                count[ nums[i] ]--;
+                if(count[ nums[i] ] == 0) curr--;            
                 i++;
             }
             ans += j-i+1;
