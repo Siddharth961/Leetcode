@@ -1,10 +1,12 @@
 class Solution {
+    HashMap<Integer, Integer> mp = new HashMap<>();
+
     public int subarraysWithKDistinct(int[] nums, int k) {
         return atmost(nums,k) - atmost(nums, k-1);
     }
 
     public int atmost(int[]nums, int k){
-        HashMap<Integer, Integer> mp = new HashMap<>();
+        mp.clear();
         int i=0;
         int j=0;
         int ans=0;
