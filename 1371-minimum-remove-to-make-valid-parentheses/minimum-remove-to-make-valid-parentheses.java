@@ -13,7 +13,6 @@ class Solution {
             st.push(c);
         }
 
-        System.out.println(st);
 
         StringBuilder sb  =new StringBuilder();
 
