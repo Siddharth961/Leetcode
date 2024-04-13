@@ -1,7 +1,7 @@
 class Solution {
     public int maximalRectangle(char[][] matrix) {
         
-        int[]heights = new int[matrix[0].length+1];
+        int[]heights = new int[matrix[0].length];
         int[]left = new int[matrix[0].length];
         int[]right = new int[matrix[0].length];
         Stack<Integer>st = new Stack<>();
@@ -12,16 +12,32 @@ class Solution {
                 if(arr[i]=='0') heights[i] = 0;
                 else heights[i]++;
             }
-            Stack<Integer> stack = new Stack<>();
-            for (int i = 0; i < heights.length; i++) {
-                while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
-                    int h = heights[stack.pop()];
-                    int w = stack.isEmpty() ? i : i - stack.peek() - 1;
-                    maxArea = Math.max(maxArea, h * w);
+
+            st.clear();
+
+            for(int i=0; i<heights.length; i++){
+                while(st.size()>0 && heights[st.peek()]>=heights[i]){
+                    st.pop();
                 }
-                stack.push(i);
+                if(st.size()==0) left[i] = -1;
+                else left[i] = st.peek();
+                st.push(i);
+
             }
-            
+
+            st.clear();
+
+            for(int i=heights.length-1; i>=0; i--){
+                while(st.size()>0 && heights[st.peek()]>=heights[i]){
+                    st.pop();
+                }
+                if(st.size()==0) right[i] = heights.length;
+                else right[i] = st.peek();
+                st.push(i);
+
+
+                maxArea = Math.max(maxArea, heights[i]*(right[i]-left[i]-1) );
+            }
 
             
         }
