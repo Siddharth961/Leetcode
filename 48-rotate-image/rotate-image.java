@@ -20,9 +20,5 @@ class Solution {
             }
         }
 
-        for(int[]arr : matrix){
-            for(int i:arr) System.out.print(i+" ");
-            System.out.println();
-        }
     }
 }
