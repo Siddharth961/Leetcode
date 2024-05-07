@@ -49,10 +49,6 @@ class Solution {
 
         j.next = i;
 
-        // while(j!=null){
-        //     System.out.print(j.val+" ");
-        //     j = j.next;
-        // }
 
         return j;
 
