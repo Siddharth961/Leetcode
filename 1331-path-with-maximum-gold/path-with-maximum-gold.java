@@ -1,5 +1,7 @@
 class Solution {
     public int getMaximumGold(int[][] grid) {
+        int count = gridWithNoZeros(grid);
+        if(count != -1) return count;
         boolean[][]back = new boolean[grid.length][grid[0].length];
 
         int ans = 0;
@@ -13,6 +15,19 @@ class Solution {
 
         return ans;
     }
+    public int gridWithNoZeros(int[][] grid){
+        int count = 0;
+        for(int i = 0; i < grid.length; i++){
+            for (int j = 0; j < grid[0].length; j++){
+                if(grid[i][j] == 0){
+                    return -1;
+                }
+                else
+                    count += grid[i][j];
+            }
+        }
+        return count;
+    }  
 
     public int get_ans( int r, int c,  int[][]grid, boolean[][]back){
 
