@@ -16,8 +16,8 @@
 class Solution {
     int ans = 0;
     public int distributeCoins(TreeNode root) {
-        int a = get_ans(root);
-        System.out.println(a);
+        get_ans(root);
+        
         return ans;
     }
 
