@@ -18,7 +18,7 @@ class Solution {
 
             al.add(left);
 
-            // System.out.println("base case-- " + al );
+      
             ans.add( new ArrayList<>(al) );
 
             al.remove(al.size()-1);
@@ -31,7 +31,7 @@ class Solution {
 
             String l = right.substring(0, i+1);
             String r = right.substring(i+1, right.length());
-            // System.out.println(l+"----"+r);
+            
             get_ans(l, r);
 
         }
