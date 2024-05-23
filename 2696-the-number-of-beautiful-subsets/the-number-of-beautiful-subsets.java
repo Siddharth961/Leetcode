@@ -1,5 +1,6 @@
 class Solution {
     HashMap<Integer, Integer> mp = new HashMap<>();
+    int[]freq = new int[1001];
     int ans = 0;
 
     public int beautifulSubsets(int[] nums, int k) {
@@ -18,15 +19,12 @@ class Solution {
         }
 
         
-        if( !mp.containsKey(nums[idx]-k) && !mp.containsKey(nums[idx]+k)){
+        if( !(nums[idx]-k>=0 && freq[nums[idx]-k]!=0) && !(nums[idx]+k<1001 && freq[nums[idx]+k]!=0) ){
 
-            mp.put(nums[idx], mp.getOrDefault(nums[idx],0) + 1 );
+            freq[ nums[idx] ]++;
             get_ans(idx+1, false, nums, k);
             
-            if(mp.get(nums[idx]) > 1){
-                mp.put(nums[idx], mp.get(nums[idx])-1 );
-            }
-            else mp.remove(nums[idx]);
+            freq[ nums[idx] ]--;
         }
 
         get_ans(idx+1, empty, nums, k);
