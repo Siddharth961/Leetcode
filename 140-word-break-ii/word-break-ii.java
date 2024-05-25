@@ -3,8 +3,7 @@ class Solution {
     List<String> asf = new ArrayList<>();
 
     public List<String> wordBreak(String s, List<String> wordDict) {
-        HashSet<String> st = new HashSet<>();
-        for(String str : wordDict) st.add(str);
+        HashSet<String> st = new HashSet<>(wordDict);
 
         get_ans(0, 0, s, st);
         return ans;
