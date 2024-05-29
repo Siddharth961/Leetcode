@@ -4,7 +4,7 @@ class Solution {
 
         for(int i=0; i<s.length(); i++){
             diff[i] = Math.abs((int)(s.charAt(i))-(int)(t.charAt(i)));
-            System.out.print(diff[i]+" ");
+            
             
         }
 
