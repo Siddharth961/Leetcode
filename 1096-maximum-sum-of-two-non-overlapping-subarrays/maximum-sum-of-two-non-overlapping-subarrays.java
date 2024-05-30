@@ -32,13 +32,13 @@ class Solution {
                     j2 = i2 + secondLen - 1;
                 }
 
-                // System.out.println("( " + i1 + "," + j1 + " )" +"--"+ "( " + i2 + "," + j2 + " )");
+                
 
                 if(j2>=nums.length) break;
 
                 sum2 = prefix[j2] - prefix[i2] + nums[i2];
 
-                // System.out.println(sum1 +"-----"+sum2);
+                
 
                 ans = Math.max( ans, sum1 + sum2); 
                 
