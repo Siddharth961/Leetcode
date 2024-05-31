@@ -1,24 +1,23 @@
 class Solution {
     public int nthUglyNumber(int n) {
-        TreeSet<Long> st = new TreeSet<>();
+        
+        int[]arr = new int[n];
+        arr[0] = 1;
 
-        int count = 0;
-        st.add((long)1);
-        long ans = 0;
+        int idx2 = 0;
+        int idx3 = 0;
+        int idx5 = 0;
 
+        
 
-        while(count<n){
+        for(int i=1; i<n; i++){
+            arr[i] = Math.min( arr[idx2]*2, Math.min(arr[idx3]*3, arr[idx5]*5) );
 
-            ans = st.pollFirst();
-            count++;
-            
-            st.add( ans * 2);
-            st.add( ans * 3);
-            st.add( ans * 5);
+            if(arr[i] == arr[idx2]*2 ) idx2++; 
+            if(arr[i] == arr[idx3]*3 ) idx3++; 
+            if(arr[i] == arr[idx5]*5 ) idx5++; 
         }
 
-        // System.out.println(st);
-
-        return (int)ans;
+        return arr[n-1];
     }
 }
