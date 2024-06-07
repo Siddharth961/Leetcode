@@ -8,10 +8,12 @@ class Solution {
        
 
         for(String s : sen.split(" ")){
-            String pre = "";
-            for(int i=1; i<=s.length(); i++){
-                pre = s.substring(0,i);
-                if(st.contains(pre))break;
+            StringBuilder pre = new StringBuilder();
+            char[]arr = s.toCharArray();
+
+            for(int i=0; i<arr.length; i++){
+                pre.append(arr[i]);
+                if(st.contains(pre.toString()))break;
             }
             if(ans.length()>0) ans.append(" ");
             ans.append(pre);
