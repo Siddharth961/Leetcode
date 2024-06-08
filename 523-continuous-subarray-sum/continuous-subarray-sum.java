@@ -14,8 +14,10 @@ class Solution {
 
              val = sum % k;
 
-            if(mp.containsKey(val) && i-mp.get(val) > 1) return true;
-            if(!mp.containsKey(val)) mp.put(val, i);
+            if(mp.containsKey(val)){
+                if(i-mp.get(val) > 1) return true;
+            }
+            else mp.put(val, i);
         }
 
         return false;
