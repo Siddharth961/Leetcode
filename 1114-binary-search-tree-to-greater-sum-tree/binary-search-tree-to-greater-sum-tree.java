@@ -15,20 +15,37 @@
  */
 class Solution {
     public TreeNode bstToGst(TreeNode root) {
-        get_ans(root, 0);
+        get_ans(root);
         return root;
     }
 
-    public int get_ans(TreeNode root, int sum){
 
-        if(root == null) return 0;
+    // public int get_ans(TreeNode root, int sum){
 
-        int right = get_ans(root.right, sum);
+    //     if(root == null) return 0;
 
-        root.val += sum > right ? sum : right;
+    //     int right = get_ans(root.right, sum);
 
-        int left = get_ans(root.left, root.val);
+    //     root.val += sum > right ? sum : right;
 
-        return  root.val > left ? root.val : left;
+    //     int left = get_ans(root.left, root.val);
+
+    //     return  root.val > left ? root.val : left;
+    // }
+
+
+    int sum = 0;
+    public void get_ans(TreeNode root){
+
+        if(root == null) return ;
+
+        get_ans(root.right);
+
+        root.val += sum;
+        sum = root.val;
+
+        get_ans(root.left);
+
+        
     }
 }
