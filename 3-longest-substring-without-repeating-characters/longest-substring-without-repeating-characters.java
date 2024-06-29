@@ -1,7 +1,9 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         
-        HashMap<Character, Integer> mp = new HashMap<>();
+        int[]pos= new int[95]; // for digits alphas space and symbols
+        Arrays.fill(pos,-1);
+
 
         int max = 0;
 
@@ -12,18 +14,18 @@ class Solution {
 
         while(j < arr.length){
             
-            if(mp.containsKey( arr[j] )){
+            if( pos[ arr[j]-' ' ] != -1){
                 
                 max = Math.max(max, j - i);
                 
-                int idx = mp.get(arr[j]);
+                int idx = pos[ arr[j]-' ' ];
                 while(i<=idx ){
-                    mp.remove(arr[i]);
+                    pos[ arr[j]-' ' ] = -1;
                     i++;
                 }
             }
 
-            mp.put(arr[j], j);
+            pos[ arr[j]-' ' ] = j;
 
             j++;
         }
