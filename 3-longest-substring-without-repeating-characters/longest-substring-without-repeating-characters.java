@@ -15,8 +15,8 @@ class Solution {
             if(mp.containsKey( arr[j] )){
                 
                 max = Math.max(max, j - i);
-                System.out.println( s.substring(i, j+1));
-                int  idx = mp.get(arr[j]);
+                
+                int idx = mp.get(arr[j]);
                 while(i<=idx ){
                     mp.remove(arr[i]);
                     i++;
@@ -28,7 +28,7 @@ class Solution {
             j++;
         }
         max = Math.max(max, j - i);
-        System.out.println( s.substring(i, j));
+       
 
         return max;
     }
