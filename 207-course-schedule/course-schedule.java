@@ -37,10 +37,10 @@ class Solution {
         boolean ans = true;
         
         for(Integer e : graph[src]){
-            if( visited[e]==false){
-                get_ans(graph, e, visited, finished);
+            
+            get_ans(graph, e, visited, finished);
                 
-            }
+            
 
             ans = finished[e];
             if(ans==false) break;
