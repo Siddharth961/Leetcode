@@ -30,10 +30,7 @@ class Solution {
 
         if( visited[src]==true ) return ;
 
-        if(graph[src].size()==0){
-            finished[src] = true;
-            return ;
-        }
+        
 
         visited[src] = true;
 
