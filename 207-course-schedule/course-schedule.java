@@ -13,25 +13,25 @@ class Solution {
 
         boolean[]visited = new boolean[numCourses];
 
-        boolean[]reached = new boolean[numCourses];
+        boolean[]finished = new boolean[numCourses];
 
-        for(int i=0; i<reached.length; i++){
+        for(int i=0; i<finished.length; i++){
 
-           if(reached[i]==false) get_ans(graph, i, visited, reached) ;
+           if(finished[i]==false) get_ans(graph, i, visited, finished) ;
         }
 
-        for( boolean val : reached) if(!val) return false;       
+        for( boolean val : finished) if(!val) return false;       
 
         return true;
 
     }
 
-    public void get_ans(ArrayList<Integer>[]graph, int src,boolean[]visited, boolean[]reached){
+    public void get_ans(ArrayList<Integer>[]graph, int src,boolean[]visited, boolean[]finished){
 
         if( visited[src]==true ) return ;
 
         if(graph[src].size()==0){
-            reached[src] = true;
+            finished[src] = true;
             return ;
         }
 
@@ -41,14 +41,14 @@ class Solution {
         
         for(Integer e : graph[src]){
             if( visited[e]==false){
-                get_ans(graph, e, visited, reached);
+                get_ans(graph, e, visited, finished);
                 
             }
 
-            ans = reached[e];
+            ans = finished[e];
             if(ans==false) break;
         }
 
-        reached[src] = ans;
+        finished[src] = ans;
     }
 }
