@@ -7,7 +7,7 @@ class Solution {
 
         for(int[]arr : prerequisites){
 
-            graph[ arr[0] ].add(arr[1]);
+            graph[ arr[1] ].add(arr[0]);
         }
 
 
