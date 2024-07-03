@@ -7,7 +7,7 @@ class Solution {
 
         for(int[]arr : prerequisites){
 
-            graph[ arr[1] ].add(arr[0]);
+            graph[ arr[0] ].add(arr[1]);
         }
 
 
@@ -38,8 +38,7 @@ class Solution {
         
         for(Integer e : graph[src]){
             
-            get_ans(graph, e, visited, finished);
-                
+            get_ans(graph, e, visited, finished);              
             
 
             ans = finished[e];
