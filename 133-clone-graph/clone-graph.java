@@ -29,7 +29,7 @@ class Solution {
 
         if(mp.containsKey(og_node.val)) return mp.get(og_node.val);
         
-        Node my_node = new Node(og_node.val);
+        Node my_node = new Node(og_node.val, new ArrayList<>());
 
         mp.put(my_node.val, my_node);
 
