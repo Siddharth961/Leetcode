@@ -4,8 +4,6 @@ class Solution {
         Stack<Character> lower = new Stack<>();
         int ans = 0;
 
-        s = s + 'x';
-
         for(char c : s.toCharArray()){
 
             if( y > x){
@@ -72,7 +70,37 @@ class Solution {
 
         }
 
-        
+        if(y>x){
+            lower.clear();
+                    // System.out.println(ans+"--"+st);
+                    while(st.size()>0){
+                        char top = st.pop();
+                        if(top=='b') lower.push(top);
+                        else if(top=='a'){
+                            if(lower.size()>0 && lower.peek()=='b'){
+                                ans += x;
+                                lower.pop();
+                            }
+                            else lower.push(top);
+                        } 
+                    }
+        }
+        else{
+            lower.clear();
+                    // System.out.println(ans+"--"+st);
+                    while(st.size()>0){
+                        char top = st.pop();
+                        if(top=='a') lower.push(top);
+                        else if(top=='b'){
+                            if(lower.size()>0 && lower.peek()=='a'){
+                                ans += y;
+                                lower.pop();
+                            }
+                            else lower.push(top);
+                        } 
+                    }
+        }
+
         return ans;
     }
 }
