@@ -5,7 +5,7 @@ class Solution {
 
     public boolean turn( char player, int idx, char[]arr ){
 
-        System.out.println(idx);
+        
 
         if(idx == arr.length){
             if(player == 'a') return false;
@@ -25,7 +25,7 @@ class Solution {
             }
         }
 
-        // if(idx==7) System.out.println(player+"---"+vowels+"--"+odd+"-- "+even);
+        
 
         if(vowels == 0){
             return player=='a' ? false : true;
@@ -36,7 +36,7 @@ class Solution {
             else idx = even;
         }
         else{
-            // if(even==-1) return true;
+            
             if( odd < even ) idx = arr.length;
             else idx = odd;
         }
