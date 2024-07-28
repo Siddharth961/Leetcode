@@ -1,15 +1,17 @@
 class Solution {
     public int firstUniqChar(String s) {
-       int ans = s.length();
-
-       for(char c='a'; c<='z'; c++ ){
-           int idx = s.indexOf(c);
-           if(idx!=-1 && idx==s.lastIndexOf(c)){
-               if(ans>idx) ans=idx;
-           }
-       }
-
-       if(ans==s.length()) return -1;
-       else return ans;
+        int[]freq = new int[26];
+        
+        char[]arr = s.toCharArray();
+        
+        for(char c : arr){
+            freq[c-'a'] ++;
+        }
+        
+        for(int i=0; i<arr.length; i++){
+            if(freq[ arr[i]-'a' ] == 1) return i;
+        }
+        
+        return -1;
     }
 }
