@@ -1,28 +1,49 @@
 class Solution {
-    public int rangeSum(int[] nums, int n, int left, int right) {
-        
-        int[]sub = new int[ (n*(n+1)/2)];
-        int k = 0;
+    public class Pair implements Comparable<Pair>{
+        int sum;
+        int idx;
 
-        for(int i=0; i<nums.length; i++){
-            int sum = 0;
-            for(int j=i; j<nums.length; j++){
-                sum += nums[j];
-                sub[k] = sum;
-                k++;
-            }
+        Pair(int s, int i){
+            sum = s;
+            idx = i;
         }
 
-        Arrays.sort(sub);
+        @Override
+        public int compareTo( Pair p2){
+            return this.sum - p2.sum;
+        }
+    }
 
-        int ans =  0;
+    public int rangeSum(int[] nums, int n, int left, int right) {
+
         int modulo = 1000000007;
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        
+        for(int i=0; i<nums.length; i++){
+            pq.add(new Pair(nums[i], i));
+        }
 
-        for(int i=left-1; i<right; i++){
-            ans = (ans+sub[i]) % modulo;
+        
+
+        int count = 0;
+        int ans = 0;
+
+        while(pq.size() > 0){
+            count++;
+            if(count>right) break;
+            Pair p = pq.poll();
+            if(count>=left) ans = (ans + p.sum)%modulo;
+
+            if(p.idx + 1 < nums.length){
+                p.sum += nums[ p.idx+1 ];
+                p.idx++;
+                pq.add(p);
+            }
+
+
         }
 
         return ans;
-
     }
 }
