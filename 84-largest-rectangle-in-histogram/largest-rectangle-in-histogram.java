@@ -32,9 +32,7 @@ class Solution {
             st.push(i);
         }
 
-        // for(int i: left) System.out.print(i+" ");
-        // System.out.println();
-        // for(int i: right) System.out.print(i+" ");
+        
 
         int ans = -1;
 
