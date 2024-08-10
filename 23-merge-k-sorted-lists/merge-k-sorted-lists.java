@@ -23,6 +23,18 @@ class Solution {
         return ans;
     }
 
+    public ListNode get_ans(int s, int e, ListNode[]lists){
+        if(s==e) return lists[s];
+        if(s == e-1) return mergeTwoLists( lists[s], lists[e]);
+
+        int mid = s + (e-s)/2;
+
+        ListNode left = get_ans(s, mid, lists);
+        ListNode right = get_ans(mid+1, e, lists);
+
+        return mergeTwoLists(left, right);
+    }
+
      public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode i = list1;
         ListNode j = list2;
