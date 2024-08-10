@@ -11,7 +11,7 @@ class Solution {
             Arrays.sort( arr );
 
             String str = new String(arr);
-            System.out.println(s);  
+            // System.out.println(s);  
 
             if( !mp.containsKey(str) ){
                 mp.put(str, ++idx );
@@ -21,7 +21,7 @@ class Solution {
             }
             else{
                 int index = mp.get(str); 
-                ans.get( index ).add(s);
+                ans.get(index ).add(s);
             }
 
         }
