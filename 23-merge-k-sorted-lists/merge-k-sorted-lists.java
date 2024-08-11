@@ -9,44 +9,43 @@
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-       
-        int count=0;
-        ListNode ans = null;
+    public class Pair implements Comparable<Pair>{
+        ListNode node;
+        int val;
 
-
-        while(count!=lists.length){
-            ans = mergeTwoLists(ans,lists[count]);
-            count++;
+        Pair(ListNode p){
+            node = p;
+            val = p.val;
         }
 
-        return ans;
+        @Override
+        public int compareTo( Pair p2 ){
+            return this.val - p2.val;
+        }
+
     }
+    public ListNode mergeKLists(ListNode[] lists) {
 
-     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode i = list1;
-        ListNode j = list2;
-        ListNode head = new ListNode();
-        ListNode k = head;
+        if(lists.length==0) return null;
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
 
-        while(i!= null && j!=null){
+        for(int i=0; i<lists.length; i++){
             
-            if(i.val<j.val){
-                k.next=i;
-                k=k.next;
-                i=i.next;
-            }
-            else{
-                k.next=j;
-                k=k.next;
-                j=j.next;
-            }
-            
+            if(lists[i]!=null) pq.add( new Pair(lists[i]) );
         }
 
-        if(i==null)k.next=j;
-        else if(j==null)k.next=i;
+        ListNode chead = new ListNode();
+        ListNode ptr = chead;
 
-        return head=head.next;
+        while(pq.size()>0){
+            Pair p = pq.poll();
+            ptr.next = p.node;
+            ptr = ptr.next;
+
+            if( p.node.next != null) pq.add(new Pair( p.node.next));
+        }
+
+        return chead.next;
     }
 }
