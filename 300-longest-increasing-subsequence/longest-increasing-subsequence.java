@@ -1,30 +1,44 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
+        int[]lsi = new int[nums.length];
+        int idx = 0;
+        lsi[idx] = nums[0];
 
-        int ans = 0;
-        int[]dp = new int[nums.length];
-
-        for(int i=0; i<nums.length; i++){
-            ans = Math.max(ans, get_ans(i, nums, dp));
-        }
-
-        return ans;
-        
-    }
-
-    public int get_ans(int idx, int[]nums, int[]dp){
-        
-        if( dp[idx] != 0) return dp[idx];
-
-        int len = 0;
-        for(int i=idx+1; i<nums.length; i++){
-            if(nums[idx] < nums[i]){
-                len = Math.max(len, get_ans(i, nums, dp));
+        for(int i=1; i<nums.length; i++){
+            if(lsi[idx]<nums[i]){
+                idx++;
+                lsi[idx] = nums[i];
+            }
+            else{
+                binary(idx, nums[i], lsi);
             }
         }
 
-        len++;
-        dp[idx] = len;
-        return len;
+        return idx+1;
+    }
+
+    public void binary(int en, int tar, int[]lsi){
+        int l=0;
+        int r=en;
+        int mid=0;
+        int ans = 0;
+
+        while(l<=r){
+            mid = (l+r)/2;
+
+            if(lsi[mid] < tar){
+                l = mid+1;
+            }
+            else{
+                ans = mid;
+                r = mid-1;
+            } 
+            
+        }
+
+        lsi[ans] = tar;
+
+        // for(int i : lsi) System.out.print(i+" ");
+        // System.out.println();
     }
 }
