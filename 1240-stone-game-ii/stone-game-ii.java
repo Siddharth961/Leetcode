@@ -1,27 +1,33 @@
 class Solution {
     public int stoneGameII(int[] piles) {
-        int n = piles.length;
-        
-        int[][] dp = new int[n][n + 1];
-        int[] suffixSum = new int[n];
-        suffixSum[n - 1] = piles[n - 1];
-        
-        for (int i = n - 2; i >= 0; i--) {
-            suffixSum[i] = suffixSum[i + 1] + piles[i];
-        }
-        
-        for (int i = n - 1; i >= 0; i--) {
-            for (int m = 1; m <= n; m++) {
-                if (i + 2 * m >= n) {
-                    dp[i][m] = suffixSum[i];
-                } else {
-                    for (int x = 1; x <= 2 * m; x++) {
-                        dp[i][m] = Math.max(dp[i][m], suffixSum[i] - dp[i + x][Math.max(m, x)]);
-                    }
-                }
+        int[][][]dp = new int[2][101][101];
+
+        return playAlice(0, 0, 1, piles, dp);
+    }
+
+    public int playAlice(int player, int idx, int m, int[]piles, int[][][]dp){
+
+        // System.out.println(player+" "+idx+" "+m);
+        if(idx >= piles.length) return 0;
+
+        if(dp[player][idx][m] != 0) return dp[player][idx][m];
+
+        int stones = 0;
+        int ans = player == 0 ? -1 : Integer.MAX_VALUE;
+
+        for(int i=idx; i<piles.length && i<idx+ 2*m; i++){
+
+            if(player == 0){
+                stones += piles[i];
+                ans = Math.max(ans, stones + playAlice(1, i+1, Math.max(i-idx+1 ,m), piles, dp) );
             }
+            else{
+                ans = Math.min(ans, playAlice(0, i+1, Math.max(i-idx+1 ,m), piles, dp) );
+            }
+
         }
-        
-        return dp[0][1];
+
+        dp[player][idx][m] = ans;
+        return ans;
     }
 }
