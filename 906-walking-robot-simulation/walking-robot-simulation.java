@@ -1,14 +1,14 @@
 class Solution {
     public int robotSim(int[] commands, int[][] obstacles) {
 
-        HashMap<Integer, List<int[]> > mp = new HashMap<>();
+        HashMap<Integer, HashSet<Integer> > mp = new HashMap<>();
         for(int[]arr : obstacles){
             if(!mp.containsKey(arr[0]) ){
-                mp.put(arr[0], new ArrayList<>() );
+                mp.put(arr[0], new HashSet<>() );
                 
             }
 
-            mp.get(arr[0]).add(arr);
+            mp.get(arr[0]).add(arr[1]);
         }
 
         // for( var e : mp.keySet()){
@@ -49,11 +49,9 @@ class Solution {
                     boolean obst = false;
 
                     if( mp.containsKey( n_x )){
-                        for(int[]arr : mp.get(n_x)){
-                            if( arr[0]==n_x && arr[1]==n_y){
-                                obst = true;
-                                break;
-                            }
+                        if(mp.get(n_x).contains(n_y)){
+                            obst = true;
+                            break;
                         }
                     }
 
