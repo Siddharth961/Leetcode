@@ -81,7 +81,6 @@ class Solution {
         }
 
         public int peek(){
-            System.out.println(head);
             return arr[head];
         }
 
