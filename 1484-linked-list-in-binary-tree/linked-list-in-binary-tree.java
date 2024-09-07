@@ -34,7 +34,7 @@ class Solution {
 
         if( root.val == head.val){
             ans = check( head, root);
-            System.out.println(ans);
+            
         }
 
         ans = ans || isSubPath(head, root.left) || isSubPath(head, root.right);
