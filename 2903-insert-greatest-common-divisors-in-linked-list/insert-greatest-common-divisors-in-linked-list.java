@@ -24,9 +24,8 @@ class Solution {
         return head;
     }
 
-    public int hcf(int x, int y){
-        int a = Math.min(x, y);
-        int b = Math.max(x, y);
+    public int hcf(int a, int b){
+        
 
         if(b%a == 0) return a;
 
