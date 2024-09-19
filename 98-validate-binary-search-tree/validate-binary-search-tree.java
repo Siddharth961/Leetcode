@@ -21,50 +21,47 @@ class Solution {
     }
 
     public int[] get_ans(TreeNode root){
-        if(root==null) return null;
-        if(root.left==null && root.right==null){
-              int[]temp = {root.val, root.val};
-              return temp;
+        if(root == null) return null;
+
+        if( root.left == null && root.right==null){
+            int[]arr = {root.val, root.val};
+            return arr;
         }
 
         int[]left = get_ans(root.left);
-
-        if(ans==false) return left;
-
+        if(ans == false) return left;
         int[]right = get_ans(root.right);
 
-        if(left!=null){
-            if(left[0]>=root.val || left[1]>=root.val){
+
+        if(left != null){
+            if( root.val <= left[0] || root.val <= left[1]){
                 ans = false;
                 return left;
             }
         }
 
-        
-        if(right!=null){
-            if(right[0]<=root.val || right[1]<=root.val){
+        if(right != null){
+            if( root.val >= right[0] || root.val >= right[1]){
                 ans = false;
                 return right;
             }
         }
 
-        if(left!=null && right!=null){
-            left[0] = left[0] < left[1] ? left[0] : left[1];
-            left[1] = right[0] > right[1] ? right[0] : right[1];
-            return left;
+        if(left != null && right!=null){
+            left[1] = right[1];
+            
         }
 
-        if(left==null){
-            right[1] = right[0] > right[1] ? right[0] : right[1];
+        else if(right == null){
+            left[1] = root.val;
+        }
+
+        else if(left == null){
             right[0] = root.val;
             return right;
         }
 
-        if(right==null){
-            left[0] = left[0] < left[1] ? left[0] : left[1];
-            left[1] = root.val;
-        }
-
         return left;
+
     }
 }
