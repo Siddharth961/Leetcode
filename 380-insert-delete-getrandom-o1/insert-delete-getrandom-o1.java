@@ -19,7 +19,6 @@ class RandomizedSet {
         if( !mp.containsKey(val) ) return false;
 
         int idx = mp.get(val);
-        // System.out.println(al.get(idx));
 
         mp.remove( al.get(idx) );
 
@@ -30,7 +29,6 @@ class RandomizedSet {
         }
         al.remove( al.size() - 1);
 
-        // System.out.println(mp);
 
         return true;
         
