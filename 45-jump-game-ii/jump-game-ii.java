@@ -1,31 +1,26 @@
 class Solution {
     public int jump(int[] nums) {
-        int n = nums.length;
+ 
+        
+        int[]dp = new int[nums.length];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[nums.length-1] = 0;
 
-        int i = 0;
-        int jumps = 0;
 
-        while(i<nums.length){
-            if(i>=n-1) return jumps;
 
-            if(i+nums[i]>=nums.length-1) return jumps+1;
+        for(int i=nums.length-2; i>=0 ; i--){
 
-            int max = 0;
-            int temp = 0;
-            for(int j=1; j<=nums[i]; j++){
-
-                int jump2 = j + nums[i+j];
-                
-                if(max<jump2){
-                    max = jump2;
-                    temp = j;
+            for(int j = 1; j <= nums[i]; j++){
+                if( i+j < nums.length ){
+                    dp[i] = Math.min(dp[i], dp[i+j]);
                 }
             }
-            
-            i += temp;
-            jumps++;
+
+            if(dp[i] != Integer.MAX_VALUE) dp[i]++;
+
         }
 
-        return jumps;
+        return dp[0];
+    
     }
 }
