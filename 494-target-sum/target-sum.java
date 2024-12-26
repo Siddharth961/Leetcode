@@ -1,18 +1,30 @@
 class Solution {
-    int ans = 0;
+    
     public int findTargetSumWays(int[] nums, int target) {
-        get_ans(0, 0, nums, target);
-        return ans;
+
+        int[][]dp = new int[nums.length][2001];
+
+        for(int[]arr : dp) Arrays.fill(arr, -1);
+
+        return get_ans(0, 0, nums, target, dp);
+        
     }
 
-    public void get_ans(int idx, int ssf, int[]nums, int tar){
+    public int get_ans(int idx, int ssf, int[]nums, int tar, int[][]dp){
 
         if(idx == nums.length){
-            if(ssf == tar) ans++;
-            return ;
+            if(ssf == tar) return 1;
+            return 0;
         }
 
-        get_ans(idx + 1, ssf + nums[idx], nums, tar);
-        get_ans(idx + 1, ssf - nums[idx], nums, tar);
+        if( dp[idx][ssf + 1000] != -1 ) return dp[idx][ssf + 1000];
+
+        int ans = 0;
+
+        ans += get_ans(idx + 1, ssf + nums[idx], nums, tar, dp);
+        ans += get_ans(idx + 1, ssf - nums[idx], nums, tar, dp);
+
+        dp[idx][ssf + 1000] = ans;
+        return ans;
     }
 }
