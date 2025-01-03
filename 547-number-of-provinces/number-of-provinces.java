@@ -1,41 +1,29 @@
 class Solution {
-    public int findCircleNum(int[][] isConnected) {
-
-        ArrayList<Integer>[]graph = new ArrayList[isConnected.length];
+    public int findCircleNum(int[][] matrix) {
         
-        for(int i=0; i<graph.length; i++) graph[i] = new ArrayList<>();
+        boolean[]visited = new boolean[matrix.length];
 
-        for(int i=0; i<isConnected.length; i++){
-            for(int j=0; j<isConnected[0].length; j++){
+        int provinces = 0;
 
-                if(isConnected[i][j]==1){
-                    graph[i].add(j);
-                    graph[j].add(i);
-                }
+        for(int i=0; i<matrix.length; i++){
+            if( !visited[i]){
+                provinces++;
+                travel(i, visited, matrix);
             }
         }
 
-        boolean[] visited = new boolean[isConnected.length];
-        int ans = 0;
-        for(int i=0; i<visited.length; i++){
-            if(visited[i]==false){
-                get_ans(graph, i, visited);
-                ans++;
-            }
-        }
-        
-        return ans;
-        
+        return provinces;
     }
 
-    public static void get_ans(ArrayList<Integer>[]graph, int src, boolean[]visited){
-        
-        if(visited[src]==true) return;
-        
+    public void travel(int src, boolean[]visited, int[][]matrix){
+
         visited[src] = true;
-        
-        for(int n : graph[src]){
-            get_ans(graph, n, visited);
+
+        for( int dst=0; dst<matrix.length; dst++){
+
+            if( matrix[src][dst] == 1 && visited[dst] == false){
+                travel(dst, visited, matrix);
+            }
         }
     }
 }
