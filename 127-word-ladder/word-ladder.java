@@ -102,6 +102,11 @@ class Solution {
         PriorityQueue<Pair> pq = new PriorityQueue<>();
         boolean[]visited = new boolean[graph.size()];
 
+        int[]distance = new int[graph.size()];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+
+        distance[src] = 1;
+
         pq.add( new Pair(src, 1));
 
         while(pq.size()>0 ){
@@ -115,7 +120,11 @@ class Solution {
             visited[p.node] = true;
 
             for(int neighbour : graph.get(p.node) ){
-                pq.add( new Pair(neighbour, p.dist+1 ) );
+
+                if(distance[neighbour] > distance[p.node] + 1){
+                    distance[neighbour] = distance[src] + 1;
+                    pq.add( new Pair(neighbour, p.dist+1 ) );
+                }
             }
         }
 
