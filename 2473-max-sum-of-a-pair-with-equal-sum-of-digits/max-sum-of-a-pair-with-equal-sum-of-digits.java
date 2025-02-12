@@ -9,8 +9,10 @@ class Solution {
 
             if(mp.containsKey(sum)){
 
-                ans = Math.max(ans, i + mp.get(sum));
-                mp.put(sum, Math.max(i, mp.get(sum) ));
+                int val = mp.get(sum);
+
+                ans = Math.max(ans, i + val);
+                mp.put(sum, Math.max(i, val ));
             }
 
             else mp.put(sum, i);
