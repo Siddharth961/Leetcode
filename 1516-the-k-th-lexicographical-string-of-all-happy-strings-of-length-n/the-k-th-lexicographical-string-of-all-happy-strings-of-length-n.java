@@ -1,14 +1,11 @@
 class Solution {
-    int idx = 1;
     public String getHappyString(int n, int k) {
         
         StringBuilder sb = new StringBuilder();
 
         get_ans(n, k, sb, ' ');
 
-        return sb.toString();
-
-       
+        return sb.toString();       
 
     }
 
