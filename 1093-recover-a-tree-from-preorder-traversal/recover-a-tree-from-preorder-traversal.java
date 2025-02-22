@@ -35,7 +35,6 @@ class Solution {
             i++;
         }
 
-        // if(n == 401) System.out.println(idx[0]+" "+level+" " + next_level);
         if(next_level == level + 1){
             idx[0] = i;
             root.left = get_ans(idx, next_level, s);
