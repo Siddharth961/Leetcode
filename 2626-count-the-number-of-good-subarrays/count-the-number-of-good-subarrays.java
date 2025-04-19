@@ -12,28 +12,31 @@ class Solution {
 
     public long atmost(int[] nums, int k) {
         int i = 0;
+        int j=0;
         long ans = 0;
         long pairs = 0;
 
         HashMap<Integer, Integer> mp = new HashMap<>();
 
-        for (int j = 0; j < nums.length; j++) {
+        while(j < nums.length) {
+
             int freq = mp.getOrDefault(nums[j], 0);
             pairs += freq;
             mp.put(nums[j], freq + 1);
 
             while (pairs > k) {
-                int count = mp.get(nums[i]);
-                pairs -= (count - 1);
-                if (count == 1) {
+                int val = mp.get(nums[i]);
+                pairs -= (val - 1);
+                if (val == 1) {
                     mp.remove(nums[i]);
                 } else {
-                    mp.put(nums[i], count - 1);
+                    mp.put(nums[i], val - 1);
                 }
                 i++;
             }
 
             ans += j - i + 1;
+            j++;
         }
 
         return ans;
