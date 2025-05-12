@@ -18,7 +18,7 @@ class Solution {
             else hori[i] = sum + hori[i-1];
         }
 
-        for(int i=0; i<r; i++){
+        for(int i=0; i<r-1; i++){
             if( hori[i] == hori[r-1] - hori[i]) return true;
         }
 
@@ -33,7 +33,7 @@ class Solution {
             else verti[j] = sum + verti[j-1];
         }
 
-        for(int i=0; i<c; i++){
+        for(int i=0; i<c-1; i++){
             if( verti[i] == verti[c-1] - verti[i]) return true;
         }
 
