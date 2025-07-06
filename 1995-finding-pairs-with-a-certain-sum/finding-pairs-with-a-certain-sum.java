@@ -1,5 +1,4 @@
 class FindSumPairs {
-    HashMap<Integer, Integer>mp1 = new HashMap<>();
     HashMap<Integer, Integer>mp2 = new HashMap<>();
 
     int[]nums1;
@@ -9,7 +8,6 @@ class FindSumPairs {
 
         this.nums1 = nums1;
         this.nums2 = nums2;
-        for(int i: nums1) mp1.put(i, mp1.getOrDefault(i, 0) + 1);
         for(int i: nums2) mp2.put(i, mp2.getOrDefault(i, 0) + 1);
     }
     
@@ -27,18 +25,18 @@ class FindSumPairs {
     public int count(int tot) {
         int ans = 0;
 
-        // for(int i: nums1){
-        //     int val = tot - i;
-        //     ans += mp2.getOrDefault(val, 0);
-        // }
-
-        for( var e : mp1.keySet()){
-
-            int val = tot - e;
-
-            ans += ( mp1.get(e) * mp2.getOrDefault(val, 0) );
-
+        for(int i: nums1){
+            int val = tot - i;
+            ans += mp2.getOrDefault(val, 0);
         }
+
+        // for( var e : mp1.keySet()){
+
+        //     int val = tot - e;
+
+        //     ans += ( mp1.get(e) * mp2.getOrDefault(val, 0) );
+
+        // }
 
         return ans;
     }
