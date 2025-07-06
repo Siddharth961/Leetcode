@@ -27,9 +27,17 @@ class FindSumPairs {
     public int count(int tot) {
         int ans = 0;
 
-        for(int i: nums1){
-            int val = tot - i;
-            ans += mp2.getOrDefault(val, 0);
+        // for(int i: nums1){
+        //     int val = tot - i;
+        //     ans += mp2.getOrDefault(val, 0);
+        // }
+
+        for( var e : mp1.keySet()){
+
+            int val = tot - e;
+
+            ans += ( mp1.get(e) * mp2.getOrDefault(val, 0) );
+
         }
 
         return ans;
