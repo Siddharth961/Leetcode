@@ -1,31 +1,50 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ans = new LinkedList();
 
-        HashMap<String, Integer> mp = new HashMap<>();
-        List<List<String>> ans = new ArrayList<>();
-        int idx = -1;
-        
         for(String s : strs){
 
-            char[]arr = s.toCharArray();
-            Arrays.sort( arr );
+            int i=0;
 
-            String str = new String(arr);
-            // System.out.println(s);  
+            for(List<String> arr : ans){
+                // List<String> arr = ans.get(i);
+                if( isAnagram(arr.get(0), s)){
+                    arr.add(s);
+                    break;
+                }
+                i++;
 
-            if( !mp.containsKey(str) ){
-                mp.put(str, ++idx );
-                List<String> al = new ArrayList<>();
-                al.add(s);
-                ans.add(al);
-            }
-            else{
-                int index = mp.get(str); 
-                ans.get(index ).add(s);
             }
 
+            if(i == ans.size()){
+                List<String> arr = new LinkedList();
+                arr.add(s);
+                ans.add(arr);
+            }
         }
 
         return ans;
     }
+
+    public boolean isAnagram(String s, String t) {
+        int[]freq = new int[26];
+
+        for(int i=0; i<s.length(); i++){
+            freq[s.charAt(i) - 'a']++;
+        }
+
+        for(int i=0; i<t.length(); i++){
+
+            char c = t.charAt(i);
+
+            if(freq[c - 'a'] == 0) return false;
+            freq[c - 'a']--;
+        }
+
+        for(int i=0; i<26; i++) if(freq[i]>0) return false;
+
+        return true;
+    }
+
+    
 }
