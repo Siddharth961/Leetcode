@@ -14,54 +14,22 @@
  * }
  */
 class Solution {
-    boolean ans = true;
     public boolean isValidBST(TreeNode root) {
-        get_ans(root);
-        return ans;
+        return get_ans(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    public int[] get_ans(TreeNode root){
-        if(root == null) return null;
+    public boolean get_ans(TreeNode root, long smallest, long largest){
 
-        if( root.left == null && root.right==null){
-            int[]arr = {root.val, root.val};
-            return arr;
-        }
+        if( root == null ) return true;
 
-        int[]left = get_ans(root.left);
-        if(ans == false) return left;
-        int[]right = get_ans(root.right);
+        if( root.val <= smallest || root.val >= largest ) return false;
 
+        boolean left = get_ans(root.left, smallest, root.val );
+        boolean right = get_ans(root.right, root.val, largest );
 
-        if(left != null){
-            if( root.val <= left[0] || root.val <= left[1]){
-                ans = false;
-                return left;
-            }
-        }
+        // System.out.println(left);
+        // System.out.println(right);
 
-        if(right != null){
-            if( root.val >= right[0] || root.val >= right[1]){
-                ans = false;
-                return right;
-            }
-        }
-
-        if(left != null && right!=null){
-            left[1] = right[1];
-            
-        }
-
-        else if(right == null){
-            left[1] = root.val;
-        }
-
-        else if(left == null){
-            right[0] = root.val;
-            return right;
-        }
-
-        return left;
-
+        return left && right;
     }
 }
