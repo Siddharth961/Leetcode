@@ -1,106 +1,52 @@
 class Solution {
     public int maximumGain(String s, int x, int y) {
-        Stack<Character> st = new Stack<>();
-        Stack<Character> lower = new Stack<>();
-        int ans = 0;
+        int amt = x > y ? x : y;
+        String tar = x > y ? "ab" : "ba";
 
-        for(char c : s.toCharArray()){
+        int total = 0;
 
-            if( y > x){
+        Deque<Character> dq = new LinkedList<>();
 
-                if(c == 'a' ){
-
-                    if(st.size()>0 && st.peek()=='b'){
-
-                        st.pop();
-                        ans += y;
-                        // System.out.println(ans+"--");
-                    }
-                    else st.push(c);
-                }
-
-                else if( c == 'b') st.push(c);
-
-                else{
-                    lower.clear();
-                    // System.out.println(ans+"--"+st);
-                    while(st.size()>0){
-                        char top = st.pop();
-                        if(top=='b') lower.push(top);
-                        else if(top=='a'){
-                            if(lower.size()>0 && lower.peek()=='b'){
-                                ans += x;
-                                lower.pop();
-                            }
-                            else lower.push(top);
-                        } 
-                    }
-                }
-            }
-
-            else{
-                if(c == 'b' ){
-
-                    if(st.size()>0 && st.peek()=='a'){
-
-                        st.pop();
-                        ans += x;
-                    }
-                    else st.push(c);
-                }
-
-                else if( c == 'a') st.push(c);
-
-                else{
-                    lower.clear();
-                    // System.out.println(ans+"--"+st);
-                    while(st.size()>0){
-                        char top = st.pop();
-                        if(top=='a') lower.push(top);
-                        else if(top=='b'){
-                            if(lower.size()>0 && lower.peek()=='a'){
-                                ans += y;
-                                lower.pop();
-                            }
-                            else lower.push(top);
-                        } 
-                    }
-                }
-            }
-
+        for(int i=0; i<s.length(); i++){
+            dq.offer( s.charAt(i));
         }
 
-        if(y>x){
-            lower.clear();
-                    // System.out.println(ans+"--"+st);
-                    while(st.size()>0){
-                        char top = st.pop();
-                        if(top=='b') lower.push(top);
-                        else if(top=='a'){
-                            if(lower.size()>0 && lower.peek()=='b'){
-                                ans += x;
-                                lower.pop();
-                            }
-                            else lower.push(top);
-                        } 
-                    }
-        }
-        else{
-            lower.clear();
-                    // System.out.println(ans+"--"+st);
-                    while(st.size()>0){
-                        char top = st.pop();
-                        if(top=='a') lower.push(top);
-                        else if(top=='b'){
-                            if(lower.size()>0 && lower.peek()=='a'){
-                                ans += y;
-                                lower.pop();
-                            }
-                            else lower.push(top);
-                        } 
-                    }
-        }
+        total += traverse(dq, tar, amt);
 
-        return ans;
+        // System.out.println(total+" " + dq);
+         amt = x <= y ? x : y;
+         tar = x <= y ? "ab" : "ba";
+
+        total += traverse(dq, tar, amt);
+
+        return total;
+
+        
+        
     }
+
+    public int traverse( Deque<Character> dq, String tar, int amt){
+
+        Stack<Character> st = new Stack<>();
+
+        int total = 0;
+
+        while(dq.size() > 0){
+            char c = dq.poll();
+
+            if(st.size()>0 &&  c == tar.charAt(1) && st.peek() == tar.charAt(0)){
+                st.pop();
+                total += amt;
+            }
+            else st.push(c);
+        }
+
+        for( char c: st){
+            dq.offerLast( c );
+        }
+
+        return total;
+    }
+
 }
+
