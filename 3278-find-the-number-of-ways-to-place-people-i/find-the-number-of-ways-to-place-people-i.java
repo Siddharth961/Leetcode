@@ -20,7 +20,7 @@ class Solution {
             int prevY = -1;
 
             while( j < points.length){
-                if(points[i][0] <= points[j][0] && points[i][1] >= points[j][1] && prevY < points[j][1]){
+                if( points[i][1] >= points[j][1] && prevY < points[j][1]){
                     pairs++;
                     prevY = points[j][1];
                 }
