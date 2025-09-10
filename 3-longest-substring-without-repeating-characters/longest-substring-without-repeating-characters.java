@@ -1,37 +1,26 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        
-        int[]pos= new int[95]; // for digits alphas space and symbols
-        Arrays.fill(pos,-1);
-
-
-        int max = 0;
-
-        char[]arr = s.toCharArray();
+        HashSet<Character> st = new HashSet<>();
 
         int i=0;
         int j=0;
 
-        while(j < arr.length){
-            
-            if( pos[ arr[j]-' ' ] != -1){
-                
-                max = Math.max(max, j - i);
-                
-                int idx = pos[ arr[j]-' ' ];
-                while(i<=idx ){
-                    pos[ arr[j]-' ' ] = -1;
-                    i++;
-                }
+        int ans = 0;
+
+        while(j<s.length()){
+
+            while( st.contains( s.charAt(j)) ){
+                st.remove( s.charAt(i) );
+                i++;
             }
 
-            pos[ arr[j]-' ' ] = j;
+            st.add( s.charAt(j) );
+
+            ans = Math.max(ans, j-i + 1);
 
             j++;
         }
-        max = Math.max(max, j - i);
-       
 
-        return max;
+        return ans;
     }
 }
