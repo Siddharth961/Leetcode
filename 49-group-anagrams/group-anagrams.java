@@ -1,50 +1,53 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> ans = new LinkedList();
+
+        HashMap<String, List<String> > mp = new HashMap();
+
+        String freq ;
 
         for(String s : strs){
 
-            int i=0;
+            freq = freqStr(s);
 
-            for(List<String> arr : ans){
-                // List<String> arr = ans.get(i);
-                if( isAnagram(arr.get(0), s)){
-                    arr.add(s);
-                    break;
-                }
-                i++;
+            if( !mp.containsKey(freq)){
 
+                mp.put(freq, new LinkedList<>() );
             }
 
-            if(i == ans.size()){
-                List<String> arr = new LinkedList();
-                arr.add(s);
-                ans.add(arr);
-            }
+            mp.get(freq).add(s);
+
+            
+        }
+
+        List<List<String>> ans = new LinkedList<>();
+
+        for( var e : mp.values()){
+            ans.add( e );
         }
 
         return ans;
     }
 
-    public boolean isAnagram(String s, String t) {
+    public String freqStr( String s){
+
         int[]freq = new int[26];
 
         for(int i=0; i<s.length(); i++){
-            freq[s.charAt(i) - 'a']++;
+            freq[ s.charAt(i) - 'a' ]++;
         }
 
-        for(int i=0; i<t.length(); i++){
+        StringBuilder sb = new StringBuilder();
 
-            char c = t.charAt(i);
+        for(int i=0; i<26; i++){
+            if(freq[i] > 0){
 
-            if(freq[c - 'a'] == 0) return false;
-            freq[c - 'a']--;
+                sb.append((char)('a' + freq[i]));
+                sb.append(i);
+            }
         }
 
-        for(int i=0; i<26; i++) if(freq[i]>0) return false;
+        // System.out.println(sb);
 
-        return true;
+        return sb.toString();
     }
-
-    
 }
