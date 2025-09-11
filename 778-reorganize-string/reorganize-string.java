@@ -1,68 +1,61 @@
-public class Pair implements Comparable<Pair>{
-    int freq;
-    char val;
-
-    Pair(int f, char v){
-        freq = f;
-        val = v;
-    }
-
-    @Override
-    public int compareTo( Pair p){
-        return this.freq - p.freq;
-    }
-
-}
-
 class Solution {
+    public class Pair{
+        char val;
+        int freq;
 
-
+        Pair(char v, int f){
+            val = v;
+            freq = f;
+        }
+    }
     public String reorganizeString(String s) {
+        
         int[]freq = new int[26];
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>( Collections.reverseOrder() );
+        int max = 0;
 
-
-        
         for(int i=0; i<s.length(); i++){
 
-            freq[ s.charAt(i) - 'a' ]++;
+            int idx = s.charAt(i) - 'a';
+            freq[ idx ]++;
+
+            // max = Math.max(max, freq[idx] );
         }
 
-        for(int i=0; i<26; i++){
+        // if(max > s.length()/2) return "";
 
-            if(freq[i] > 0) pq.add( new Pair(freq[i], (char)('a' + i) ));
-        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>( (a,b) -> b.freq - a.freq);
 
         StringBuilder sb = new StringBuilder();
 
-        while(pq.size() > 0){
+        for(int i=0; i<26; i++){
+           if(freq[i] > 0) pq.add( new Pair( (char)('a' + i), freq[i] ) );
+
+        }
+
+        while(pq.size() > 1){
+            Pair p1 = pq.remove();
+            Pair p2 = pq.remove();
+
+            sb.append(p1.val);
+            sb.append(p2.val);
+
+            p1.freq--;
+            p2.freq--;
+
+            if(p1.freq > 0) pq.add(p1);
+            if(p2.freq > 0) pq.add(p2);
+        }
+
+        if(pq.size() > 0){
             Pair p = pq.remove();
 
-            if( sb.length() == 0 || sb.charAt(sb.length() - 1) != p.val){
-                sb.append(p.val);
-                p.freq--;
+            if(p.freq > 1) return "";
 
-                
-            }
-            else{
-
-                if(pq.size() == 0) return "";
-
-                Pair p2 = pq.remove();
-                sb.append(p2.val);
-                p2.freq--;
-
-                
-               if(p2.freq > 0) pq.add(p2);
-
-            }
-
-            if(p.freq > 0) pq.add(p);
+            sb.append(p.val);
         }
 
         return sb.toString();
-
 
     }
 }
