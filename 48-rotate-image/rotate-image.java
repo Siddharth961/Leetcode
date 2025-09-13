@@ -1,24 +1,37 @@
 class Solution {
     public void rotate(int[][] matrix) {
-
-        int temp = 0;
         
-        for(int i=0; i<matrix.length; i++){
+        diagwise(matrix);
 
-            for(int j=0; j<i; j++){
-                temp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = temp;
+        for(int r = 0; r<matrix.length; r++){
+
+            int i=0;
+            int j = matrix.length - 1;
+
+            while(i < j){
+                int temp = matrix[r][i];
+
+                matrix[r][i] = matrix[r][j];
+                matrix[r][j] = temp;
+
+                i++;
+                j--;
             }
         }
 
-        for(int j=0; j<matrix[0].length/2; j++){
-            for(int i=0; i<matrix.length; i++){
-                temp = matrix[i][j];
-                matrix[i][j] = matrix[i][ matrix[0].length-1-j ];
-                matrix[i][ matrix[0].length-1-j ] = temp;
+        
+    }
+
+    public void diagwise(int [][]matrix){
+
+        for(int diag = 0; diag <matrix.length; diag++){
+
+            for(int i=diag+1; i<matrix.length; i++){
+
+                int temp = matrix[diag][i];
+                matrix[diag][i] = matrix[i][diag];
+                matrix[i][diag] = temp;
             }
         }
-
     }
 }
