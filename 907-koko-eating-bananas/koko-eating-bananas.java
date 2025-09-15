@@ -12,7 +12,7 @@ class Solution {
             mid = (l + h)/2;
 
             if( check(mid, hours, piles)){
-                ans = Math.min(ans, mid);
+                ans = mid;
                 h = mid-1;
             }
 
