@@ -1,46 +1,40 @@
 class Solution {
-    public int minEatingSpeed(int[] piles, int h) {
-        
-        int max = 0;
-        for(int i : piles){
-            if(max < i) max = i;
-        }
-        int left = 1;
-        int right = max;
+    public int minEatingSpeed(int[] piles, int hours) {
+        int l = 1;
+        int h = 0;
 
+        for(int i : piles) h = Math.max(h, i);
 
         int mid = 0;
+        int ans = h;
 
-        while(left < right){
-            mid = left + (right - left)/2;
+        while(l <= h){
+            mid = (l + h)/2;
 
-            int used_hour = check(piles, h, mid);
-
-            if( used_hour <= 0){
-                right = mid;
-
+            if( check(mid, hours, piles)){
+                ans = Math.min(ans, mid);
+                h = mid-1;
             }
 
-            else{
-                left = mid+1;
-                
-            }
-                
+            else l = mid+1;
         }
 
-        return left;
-        
+        return ans;
+
     }
 
-    public int check(int[]piles, int h, int candi_rate){
-        
-        int hours = 0;
+    public boolean check(int rate, int h, int[]piles){
 
-        for(int i : piles){
-            hours += i/candi_rate + ( i%candi_rate != 0 ? 1 : 0);
+        long taken = 0;
+
+        for(int i: piles){
+
+            taken += i/rate;
+            if(i % rate != 0) taken++;
         }
 
-        return hours - h;
 
+
+        return taken <= h;
     }
 }
