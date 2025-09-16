@@ -42,17 +42,13 @@ class Solution {
 
     public boolean check (String s, String b){
         
-        int[]freq = new int[26];
 
         int count = 0;
         for(int i=0; i<s.length(); i++){
 
             if(s.charAt(i) != b.charAt(i) ) count++;
 
-        }
-
-
-        
+        }        
 
         return count == 1;
     }
