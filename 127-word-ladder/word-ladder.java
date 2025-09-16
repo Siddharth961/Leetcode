@@ -29,6 +29,7 @@ class Solution {
 
                     if( !visited.contains(b) && check(s,b) ){
                          q.add(b);
+                         
                     }
                 }
 
