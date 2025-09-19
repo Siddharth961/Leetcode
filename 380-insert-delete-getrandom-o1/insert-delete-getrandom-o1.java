@@ -1,17 +1,21 @@
 class RandomizedSet {
 
-    ArrayList<Integer>al ;
-    HashMap<Integer, Integer> mp;
+    HashMap<Integer, Integer> mp; // val -> idx
+    ArrayList<Integer> al; // for O(1) access
 
     public RandomizedSet() {
-        al = new ArrayList<>();
         mp = new HashMap<>();
+        al = new ArrayList<>();
     }
     
     public boolean insert(int val) {
         if(mp.containsKey(val) ) return false;
+
+
+
         al.add(val);
-        mp.put(val, al.size() - 1);
+        mp.put(val, al.size()-1);
+
         return true;
     }
     
@@ -19,24 +23,25 @@ class RandomizedSet {
         if( !mp.containsKey(val) ) return false;
 
         int idx = mp.get(val);
+        int last_val = al.get(al.size() - 1);
 
-        mp.remove( al.get(idx) );
+        // System.out.println(al);
+        al.set(idx,  last_val);
+        mp.put(last_val, idx);
 
-        if(idx != al.size()-1){
-
-            al.set( idx, al.get(al.size() - 1));
-            mp.put( al.get(idx), idx);
-        }
+        mp.remove(val);        
         al.remove( al.size() - 1);
 
+        // System.out.println(al);
 
         return true;
-        
     }
     
     public int getRandom() {
-        int random = (int)Math.floor( Math.random()*al.size() );
-        return al.get(random);
+        
+        int idx = (int)Math.floor( al.size() * Math.random() );
+
+        return al.get(idx);
     }
 }
 
@@ -47,3 +52,10 @@ class RandomizedSet {
  * boolean param_2 = obj.remove(val);
  * int param_3 = obj.getRandom();
  */
+
+// hashset or map is needed to check val presence in O(1)
+ 
+//  for O(1) removal - hashmap 
+//  for O(1) access - arraylist or array
+
+//  ..lazy loading..
