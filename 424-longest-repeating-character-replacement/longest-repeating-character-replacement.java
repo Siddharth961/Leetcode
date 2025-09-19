@@ -1,39 +1,38 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-
-        int i=0;
-        int j=0;
-        int count = 0;
-
-        int max = 0;
-
-        char[]arr = s.toCharArray();
         
+        int ans = 0;
+
         for(char c = 'A'; c<='Z'; c++){
-
-            i=0;
-            j=0;
-            count = 0;
-
-            while(j<arr.length){
-
-                // if(arr[j]=='A') j++
-                if( arr[j] != c){
-                    count ++;
-
-                    while(count > k){
-                        if(arr[i] != c) count--;
-                        i++; 
-                    }
-                }
-
-                max = Math.max( max, j-i+1);
-                j++;
-            }
-            max = Math.max( max, j-i);
-
+            ans = Math.max( ans, travel(c, k, s));
         }
 
-        return max;
+        return ans;
+    }
+
+    public int travel(char tar, int k, String s){
+
+        int ans = 0;
+        int count = 0;
+
+        int j=0;
+        int i=0;
+
+        while(j < s.length() ){
+            char ch = s.charAt(j);
+
+            if(ch != tar) count++;
+
+            while(count > k){
+
+                if(s.charAt(i) != tar) count--;
+                i++;
+            }
+
+            ans = Math.max(ans, j-i+1);
+            j++;
+        }
+
+        return ans;
     }
 }
