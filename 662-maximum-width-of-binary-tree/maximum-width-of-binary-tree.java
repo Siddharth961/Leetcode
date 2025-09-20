@@ -14,34 +14,33 @@
  * }
  */
 class Solution {
-    public class Node{
-        TreeNode root;
-        int level;
-        Node(TreeNode root, int level){
-            this.root = root;
-            this.level = level;
-        }
-    }
+    int ans = 0;
+    HashMap<Integer, Integer> mp;
     public int widthOfBinaryTree(TreeNode root) {
-        LinkedList<Node> q = new LinkedList<>();
+        mp = new HashMap<>();
 
-        q.add( new Node(root, 0));
-        int max = 0;
+        travel(0, 0, root);
 
-        while(q.size()>0){
-            int n = q.size();
-            max = Math.max( max, q.getLast().level - q.getFirst().level + 1);
+        return ans;
+    }
 
-            while(n>0){
-                Node temp = q.removeFirst();
+    public void travel(int idx, int level, TreeNode root){
 
-                if(temp.root.left != null) q.add(new Node(temp.root.left, 2*temp.level));
-                if(temp.root.right != null) q.add(new Node(temp.root.right, 2*temp.level + 1));
+        if(root == null) return ;
 
-                n--;
-            }
+        if( !mp.containsKey(level) ){
+            mp.put(level, idx);
+            ans = Math.max(ans, 1);
+        } 
+        else{
 
+            ans = Math.max( ans, Math.abs(mp.get(level) - idx) + 1);
+
+            mp.put(level, Math.min(mp.get(level), idx) );
         }
-        return max;
+
+        travel(2*idx + 1, level+1, root.left );
+        travel(2*idx + 2, level+1, root.right );
+
     }
 }
