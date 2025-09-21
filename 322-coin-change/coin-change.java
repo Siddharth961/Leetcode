@@ -1,22 +1,22 @@
 class Solution {
-    public int coinChange(int[] coins, int amt) {
+    public int coinChange(int[] coins, int amount) {
+        
+        int[]dp = new int[amount+1];
 
-        int[]dp = new int[amt + 1];
-        dp[0] = 0;
+        for(int i=amount-1; i>=0; i--){
 
-        for(int i=1; i<=amt; i++){
+            int val = Integer.MAX_VALUE;
 
-            int min = Integer.MAX_VALUE - 1;
+            for(int j=0; j<coins.length; j++){
 
-            for(int coin : coins){
-                if(i-coin >= 0) min = Math.min(min, dp[i-coin]);
+                if( coins[j] <= amount && i + coins[j] <= amount){
+                    val = Math.min(val, dp[i + coins[j]]);
+                }
             }
 
-            dp[i] = min + 1;
+            dp[i] = val == Integer.MAX_VALUE ? val : val + 1;
         }
 
-        if(dp[amt] == Integer.MAX_VALUE) return -1;
-        return dp[amt];
-        
+        return dp[0] == Integer.MAX_VALUE ? -1 : dp[0];
     }
 }
