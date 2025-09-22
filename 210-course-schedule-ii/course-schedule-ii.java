@@ -1,59 +1,45 @@
 class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        List<Integer>[]graph = new LinkedList[numCourses];
+        int[]inedge = new int[numCourses];
 
-    class Node{
-        int val ;
-        int indegree = 0;
-        LinkedList<Integer> neig = new LinkedList<>();
+        for(int i=0; i<numCourses; i++) graph[i] = new LinkedList<>();
 
-        Node(int v){ val = v;}
-    }
-    public int[] findOrder(int n, int[][] edges) {
+        for(int[]arr : prerequisites){
 
-        
-        
-        Node[]graph = new Node[n];
+            graph[ arr[1] ].add( arr[0] );
 
-        for(int i=0; i<n; i++) graph[i] = new Node(i);
-
-        for( int[]e : edges){
-            graph[ e[1] ].neig.add( e[0] );
-
-            graph[ e[0] ].indegree++;
+            inedge[ arr[0] ]++;
         }
 
-        Stack<Node> st = new Stack<>();
-        int[]ans = new int[n];
+        Queue<Integer> q = new LinkedList<>();
+        boolean[]visited = new boolean[numCourses];
+
+        for(int i=0; i<numCourses; i++) if(inedge[i] == 0) q.add(i);
+
+        int[]ans = new int[numCourses];
         int idx = 0;
 
-        while(true){
+        while(q.size() > 0){
+            int node = q.remove();
 
-            for(Node node : graph){
+            ans[idx] = node;
+            idx++;
 
-                if(node.indegree == 0) st.push(node);
+            visited[node] = true;
 
-            }
+            for(int neig : graph[node]){
 
-            if(st.size() == 0) break;
-
-            while( st.size() > 0){
-                Node node = st.pop();
-
-                for(int i : node.neig){
-                    graph[i].indegree--;
+                if( !visited[neig] ){
+                    inedge[neig]--;
+                    if(inedge[neig] == 0) q.add(neig);
                 }
-
-                node.indegree = -1;
-
-                ans[idx] = node.val;
-                idx++;
             }
         }
 
-        for(Node node : graph) if(node.indegree > 0) ans = new int[0];
-
-        return ans;
+        // System.out.println(topo);
 
 
-
+        return idx == ans.length ? ans : new int[]{};
     }
 }
