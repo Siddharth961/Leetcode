@@ -1,47 +1,43 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         
-        ArrayList<Integer>[]graph = new ArrayList[numCourses];
-        int[]inward = new int[numCourses];
+        List<Integer>[]graph = new LinkedList[numCourses];
+        int[]inedge = new int[numCourses];
 
-        for(int i=0; i<graph.length; i++) graph[i] = new ArrayList<>();
-
+        for(int i=0; i<numCourses; i++) graph[i] = new LinkedList<>();
 
         for(int[]arr : prerequisites){
 
-            graph[ arr[1] ].add(arr[0]);
+            graph[ arr[1] ].add( arr[0] );
 
-            inward[ arr[0] ]++;
+            inedge[ arr[0] ]++;
         }
 
+        Queue<Integer> q = new LinkedList<>();
+        LinkedList<Integer> topo = new LinkedList<>();
 
         boolean[]visited = new boolean[numCourses];
 
-        ArrayList<Integer> topo = new ArrayList<>();
+        for(int i=0; i<numCourses; i++) if(inedge[i] == 0) q.add(i);
 
-        Queue<Integer> q = new LinkedList<>();
-
-        for(int i=0; i<inward.length; i++) if(inward[i]==0) q.add(i);
-
-        while(q.size()>0){
-
-            int node = q.poll();
+        while(q.size() > 0){
+            int node = q.remove();
 
             topo.add(node);
+
             visited[node] = true;
 
-            for(int n : graph[node] ){
-                
-                if(!visited[n]){
-                    inward[n]--;
-                    if(inward[n]==0)q.add(n);
+            for(int neig : graph[node]){
+
+                if( !visited[neig] ){
+                    inedge[neig]--;
+                    if(inedge[neig] == 0) q.add(neig);
                 }
             }
         }
 
-        if(topo.size()==numCourses) return true;
-        return false; 
+        // System.out.println(topo);
 
+        return topo.size() == numCourses;
     }
-
 }
