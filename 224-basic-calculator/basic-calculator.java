@@ -101,17 +101,12 @@ class Solution {
             int n = (int)(s.charAt(i) - '0');
 
             val = val*10 + n;
-            System.out.println(val);
+            // System.out.println(val);
         }
 
         return negative == false ?  val : -val;
     }
 
-    public boolean isNum( String s ){
-        char c = s.charAt( s.length() - 1);
-
-        return c >= '0' && c <= '9';
-    }
 }
 
 // push elments as string 
