@@ -1,20 +1,43 @@
 class Solution {
     public int maxFrequency(int[] nums, int k) {
-        HashMap<Integer, Integer> mp = new HashMap<>();
+        // HashMap<Integer, Integer> mp = new HashMap<>();
 
-        int total_k = 0;
+        // int total_k = 0;
 
-        int ans = 0;
+        // int ans = 0;
 
-        for(int i : nums) if(i == k) total_k++;
+        // for(int i : nums) if(i == k) total_k++;
 
         
 
-        for(int i=1; i<=50; i++){
-            ans = Math.max( ans, check(k, i, total_k, nums) );
+        // for(int i=1; i<=50; i++){
+        //     ans = Math.max( ans, check(k, i, total_k, nums) );
+        // }
+
+        // return Math.max(ans, total_k);
+
+        int[]max_till_now = new int[51]; // max if we think of each element individually
+
+        int max = 0; // global max
+
+        int k_till_now = 0;
+
+        for(int i : nums){
+            if(i == k){
+                k_till_now++;
+
+                max_till_now[i] = max + 1; // i == k can contribute to any previous sub array
+
+            }
+            else{
+                max_till_now[i] = Math.max(k_till_now,  max_till_now[i] ) + 1; // we checking that if after previous max calculated for i.. is freq of k now bigger than it now ( that is reverting any changes made ) or should we start or continue changing
+
+            }
+
+            max = Math.max(max, max_till_now[i] ); // updating global max
         }
 
-        return Math.max(ans, total_k);
+        return max;
     }
 
     public int check(int k, int tar, int total_k, int[]nums){
