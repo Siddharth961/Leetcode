@@ -5,27 +5,28 @@ class Solution {
 
         while(j < nums.length){
 
-            if(nums[j] != 0 && i != j){
+            if(nums[j] != 0){
 
                 // j = i;
 
+                // while(j<nums.length && nums[j] == 0) j++;
 
                 // if(j == nums.length) break;
 
                 // nums[i] = nums[j];
                 // nums[j] = 0;
-                while(i<j && nums[i] != 0) i++;
 
-                if(i != j){
-
-                    nums[i] = nums[j];
-                    nums[j] = 0;
-                    i++;
-                }
-
+                nums[i] = nums[j];
+                // nums[j] = 0;
+                i++;
             }
 
             j++;
+        }
+
+        while(i<nums.length){
+             nums[i] = 0;
+             i++;
         }
     }
 }
