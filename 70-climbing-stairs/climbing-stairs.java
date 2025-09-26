@@ -14,7 +14,7 @@ class Solution {
     }
 }
 
-// 1   2   3   4  5   6  7
-// 11  8   5   3  2   1  1
+//0   1   2   3   4  5   6  7
+//21  13  8   5   3  2   1  1
 
 // basically fibonnaci
