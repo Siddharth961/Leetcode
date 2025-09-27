@@ -15,21 +15,23 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return get_ans(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        return check(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    public boolean get_ans(TreeNode root, long smallest, long largest){
+    public boolean check(TreeNode root, long lowerbound, long upperbound){
+        if(root == null ) return true;
 
-        if( root == null ) return true;
+        boolean curr = root.val > lowerbound && root.val < upperbound;
+        boolean left = check(root.left, lowerbound, root.val);
+        boolean right = check(root.right, root.val, upperbound);
 
-        if( root.val <= smallest || root.val >= largest ) return false;
-
-        boolean left = get_ans(root.left, smallest, root.val );
-        boolean right = get_ans(root.right, root.val, largest );
-
-        // System.out.println(left);
-        // System.out.println(right);
-
-        return left && right;
+        return curr && left && right;
     }
 }
+
+// on right
+
+// curr - greater than parent less than  parents less
+// left tree - greater then parent less then curr
+// right tree - greater than current
+
