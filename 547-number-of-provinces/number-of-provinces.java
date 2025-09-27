@@ -1,28 +1,46 @@
 class Solution {
-    public int findCircleNum(int[][] matrix) {
+    public int findCircleNum(int[][] isConnected) {
+
+        int n = isConnected.length;
         
-        boolean[]visited = new boolean[matrix.length];
+        boolean[]visited = new boolean[n];
 
-        int provinces = 0;
+        int ans = 0;
 
-        for(int i=0; i<matrix.length; i++){
-            if( !visited[i]){
-                provinces++;
-                travel(i, visited, matrix);
+        for(int i=0; i<n; i++){
+            if( !visited[i] ){
+                ans++;
+                bfs(i, visited, isConnected);
             }
+
+            System.out.println(ans);
         }
 
-        return provinces;
+        return ans;
     }
 
-    public void travel(int src, boolean[]visited, int[][]matrix){
+    public void bfs(int n, boolean[]visited, int[][]graph){
 
-        visited[src] = true;
+        Queue<Integer>q = new LinkedList<>();
 
-        for( int dst=0; dst<matrix.length; dst++){
+        q.add(n);
 
-            if( matrix[src][dst] == 1 && visited[dst] == false){
-                travel(dst, visited, matrix);
+        while(q.size() > 0){
+            int node = q.remove();
+
+            
+
+            visited[node] = true;
+
+            for(int i=0; i<graph.length; i++){
+
+                if( graph[node][i] == 1){
+
+                    if( ! visited[i]){
+                        q.add(i);
+                    }
+                }
+
             }
         }
     }
