@@ -13,7 +13,7 @@ class Solution {
                 bfs(i, visited, isConnected);
             }
 
-            System.out.println(ans);
+            // System.out.println(ans);
         }
 
         return ans;
