@@ -3,6 +3,7 @@ class Solution {
     public int minDistance(String word1, String word2) {
 
         dp = new int[word1.length()][word2.length()];
+        for(int[] row : dp) Arrays.fill(row, -1);
         return get_ans( 0, 0, word1, word2);
     }
 
@@ -20,7 +21,7 @@ class Solution {
             return ops;
         }
 
-        if(dp[i][j] != 0) return dp[i][j];
+        if(dp[i][j] != -1) return dp[i][j];
 
         int ans = Integer.MAX_VALUE;
 
