@@ -46,7 +46,7 @@ class Solution {
 
         Node curr = lookup.get(head);
 
-        if(head.random != null)curr.random = lookup.get( head.random );
+        curr.random = lookup.get( head.random );
 
         populate_random(head.next);
     }
