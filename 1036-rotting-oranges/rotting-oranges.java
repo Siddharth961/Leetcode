@@ -1,71 +1,66 @@
 class Solution {
-
-    public class Point{
-        int x;
-        int y;
-        Point(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
-    }
-
     public int orangesRotting(int[][] grid) {
+        
+        Queue<int[]> q = new LinkedList<>();
 
-        Queue<Point> q = new LinkedList<>();
+        int fresh = 0;
 
         for(int i=0; i<grid.length; i++){
             for(int j=0; j<grid[0].length; j++){
-                if(grid[i][j] == 2) q.add( new Point(i, j));
+
+                if(grid[i][j] == 2) q.add(new int[]{i, j});
+                if(grid[i][j] == 1) fresh++;
+
             }
         }
 
-        q.add( new Point(-1, -1));
-        int ans = 0;
-        int n = grid.length;
-        int m = grid[0].length;
+        int minutes = 0;
 
-        while(q.size() > 1){
+        while(q.size() > 0 && fresh > 0){
 
-            Point p = q.poll();
+            int level_size = q.size();
 
-            if(p.x == -1){
-                q.add(p);
-                ans++;
-                continue;
+            while(level_size > 0){
+
+                fresh -= spread(q.remove(), q, grid);
+
+                level_size--;
             }
 
-            int i = p.x;
-            int j = p.y;
-
-            if(i-1 >=0 && grid[i-1][j] == 1){
-                grid[i-1][j] = 2;
-                q.add( new Point(i-1, j));
-            }
-
-            if(j+1 < m && grid[i][j+1] == 1){
-                grid[i][j+1] = 2;
-                q.add( new Point(i, j+1));
-            }
-            if(i+1 <n && grid[i+1][j] == 1){
-                grid[i+1][j] = 2; 
-                q.add( new Point(i+1, j));
-            }
-            if(j-1 >=0 && grid[i][j-1] == 1){
-                grid[i][j-1] = 2;
-                q.add( new Point(i, j-1));
-            }
-
-
-
+            minutes++;
         }
 
-        for(int[]arr : grid){
-            for(int i : arr) if( i == 1) return -1;
+        if(fresh > 0) return -1;
+
+        return minutes;
+
+    }
+
+    public int spread(int[]coord, Queue<int[]> q, int[][]grid){
+
+        int[][]dirs = new int[][]{
+            {0, -1},
+            {1, 0},
+            {0, 1},
+            {-1, 0}
+        };
+
+        int count = 0;
+
+        for(int[]a : dirs){
+
+            int x = coord[0] + a[0];
+            int y = coord[1] + a[1];
+
+            if(x < 0 || y < 0 || x == grid.length || y == grid[0].length) continue;
+
+            if( grid[x][y] == 1){
+                grid[x][y] = 2;
+                q.add(new int[]{x, y});
+                count++;
+            }
         }
 
-        return ans;
-
-
-        
+        return count;
     }
 }
