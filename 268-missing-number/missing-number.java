@@ -1,8 +1,21 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        int n = nums.length;
-        int sum = ( n * (n+1))/2;
-        for(int i : nums) sum -= i;
-        return sum;
+        
+        int mark = nums.length + 1;
+
+        for(int i : nums){
+
+            int idx = i % mark;
+
+            if(idx < nums.length) nums[idx] += mark;
+        }
+
+        // for(int i : nums) System.out.print(i + " ");
+
+        for(int i=0; i<nums.length; i++){
+            if( nums[i] <= nums.length) return i;
+        }
+
+        return nums.length;
     }
 }
