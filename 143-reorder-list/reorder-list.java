@@ -10,29 +10,75 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        ListNode tail = head;
-        Stack<ListNode> st = new Stack<>();
-        while(tail!=null){
-            st.add(tail);
-            tail = tail.next;
 
+        if(head == null || head.next == null) return ;
+        
+        ListNode i = head;
+        ListNode j = head;
+
+
+        while(j.next != null && j.next.next != null){
+
+            i = i.next;
+            j = j.next.next;
         }
 
-        reorder(head,st);
+        ListNode head2 = i.next;
+
+        // System.out.println(k.val);
+        i.next = null;
+
+        head2 = reverse(head2);
+
+        ListNode k = head2;
+
+        // while(k!=null){
+        //     System.out.println(k.val);
+        //     k = k.next;
+        // }
+
+        i = head;
+        j = head2;
+
+        ListNode chead = new ListNode();
+        ListNode ptr = chead;
         
+
+        while(i != null || j!= null){
+
+            ptr.next = i;
+            i = i.next;
+            ptr = ptr.next;
+
+            ptr.next = j;
+            if(j != null) j = j.next;
+            ptr = ptr.next;
+        }
+
+
     }
 
-    public void reorder(ListNode head, Stack<ListNode> st){
-        if(head.next==null || head.next.next==null) return;
-        ListNode tail = st.pop();
+    public ListNode reverse(ListNode head){
 
-        ListNode temp = head.next;
-        head.next = tail;
-        tail.next = temp;
+        if(head == null || head.next == null) return head;
 
-        st.peek().next=null;
-        head = temp;
+        ListNode i = head;
+        ListNode j = head.next;
+        ListNode temp;
 
-        reorder(head,st);
+        i.next = null;
+
+        while( j.next != null){
+
+            temp = j.next;
+            j.next = i;
+
+            i = j;
+            j = temp;
+        }
+
+        j.next = i;
+
+        return j;
     }
 }
