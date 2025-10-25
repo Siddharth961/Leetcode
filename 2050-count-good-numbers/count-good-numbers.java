@@ -1,21 +1,34 @@
 class Solution {
-    long Mod = 1_000_000_007;
+    int modulo = 1000000007;
     public int countGoodNumbers(long n) {
-        long even = (n+1)/2;
-        long odd = n - even;
+        
+        int ans = 0;
 
-        long ans = pow(5,even) * pow(4,odd) % Mod;
-         
 
-         return (int)ans;
+        long even = (n/2 + n%2) ;
+
+        long odd = (n - even) ;
+
+        // for(int i=0; i<n; i++){
+
+        // }
+
+        long a = get_pow(5, even);
+        long b = get_pow(4, odd);
+
+        return (int)( (a * b) % modulo);
     }
 
-    public long pow(long x, long n){
-        if(n==0) return 1;
+    public long get_pow(int num, long power){
 
-        long temp = pow(x,n/2);
+        if(power == 0) return 1;
 
-        if(n%2==0) return (temp*temp)%Mod;
-        return (x*temp*temp)%Mod;
+        long val = get_pow(num, power/2 ) ;
+
+        long ans = (val * val) % modulo;
+
+        if(power % 2 == 0) return ans;
+
+        return (ans * num) % modulo;
     }
 }
