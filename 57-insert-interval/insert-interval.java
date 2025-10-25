@@ -1,55 +1,74 @@
 class Solution {
-    public int[][] insert(int[][] inter, int[] newIn) {
-        ArrayList<int[]> al = new ArrayList<>();
-        boolean merged = false;
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        
+        List<int[]>ll = new LinkedList<>();
 
-        int i=0;
-        while(i<inter.length){
-            if(merged==false && newIn[1]<inter[i][0]){ // new interval occurs completely before start of this interval
-                al.add(newIn);
-                merged=true;
+        int i = 0;
+
+        // if(intervals.length == 0 || newInterval[1] < intervals[0][1]) ll.add(newInterval);
+        int end = -1;
+
+        while(i < intervals.length){
+
+            if( end < newInterval[0] && newInterval[1] < intervals[i][0]){
+                ll.add(newInterval);
+                end = newInterval[1];
             }
-            if(merged==false && newIn[0]<inter[i][0] && newIn[1]>= inter[i][0]){ // new interval starts before this interval but overlaps with it
-                inter[i][0] = newIn[0];
-                inter[i][1] = inter[i][1]>newIn[1] ? inter[i][1] : newIn[1];
 
-            }
+            if( overlap(intervals[i] , newInterval) ){
 
-            if(newIn[0] >= inter[i][0] && newIn[0]<= inter[i][1] && merged==false){ // new interval starts somewhere between this interval
-                inter[i][1] = inter[i][1]>newIn[1] ? inter[i][1] : newIn[1];
-
-                merged =  true;
-            }
- 
-            int[]temp = inter[i]; 
-
-            while(i+1<inter.length && inter[i+1][0] <= temp[1]){
+                intervals[i][0] = Math.min(intervals[i][0], newInterval[0]);
+                intervals[i][1] = Math.max(intervals[i][1], newInterval[1]);
                 
-                temp[1] = temp[1] < inter[i+1][1] ? inter[i+1][1] : temp[1]; // next interval starts somewhere between this interval
-                
-                if(newIn[0] >= temp[0] && newIn[0]<= temp[0] && merged==false){ // new interval starts somewhere between this interval
-                    temp[1] =  temp[1]>newIn[1] ? temp[1] : newIn[1] ;
-                    merged = true;
-                }
+            // System.out.println(intervals[i][0] + " " + intervals[i][1]);
+            }
 
+
+            if(ll.size() == 0){
+                ll.add(intervals[i]);
+
+                end = intervals[i][1];
                 i++;
+                continue;
             }
 
-            al.add(temp);
-            
+            int[]prev = ll.get(ll.size()-1);
+
+            if( overlap(prev, intervals[i]) ){
+
+                    prev[0] = Math.min(prev[0], intervals[i][0]);
+                    prev[1] = Math.max(prev[1], intervals[i][1]);
+            }
+
+            else ll.add(intervals[i]);
+
+            end = ll.get(ll.size()-1)[1];
+
             i++;
+
+        }
+        // int[]prev = ll.get(ll.size()-1);
+
+        if(ll.size() == 0 || ll.get(ll.size()-1)[1] < newInterval[0]) ll.add(newInterval);
+
+        // for(int[]a : ll) System.out.println(a[0] + " " + a[1]);
+
+        int[][]ans = new int[ll.size()][];
+
+        int idx = 0;
+        for(int[] a : ll){
+            ans[idx] = a;
+            idx++;
         }
 
-        if(merged==false)al.add(newIn); // in case array size is zero or new interval is to be added seperately in last
-
-        int[][]ans = new int[al.size()][2];
-        i=0;
-
-        for(var e : al){
-            ans[i][0] = e[0];
-            ans[i][1] = e[1];
-            i++;
-        }
         return ans;
+    }
+
+    public boolean overlap(int[]a, int[]b){
+
+        // check if a's start point is between start and end of b
+        // check if a's end point is between start and end of b
+
+        return ( (a[0] >= b[0] && a[0] <= b[1]) || ( a[1] >= b[0] && a[1] <= b[1]) );
     }
 }
