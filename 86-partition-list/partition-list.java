@@ -10,31 +10,34 @@
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-        ListNode l_head = new ListNode();
-        ListNode h_head = new ListNode();
+        
+        ListNode chead1 = new ListNode();
+        ListNode chead2 = new ListNode();
 
-        ListNode l = l_head;
-        ListNode h = h_head;
+        ListNode less = chead1;
+        ListNode more = chead2;
+
+
         ListNode ptr = head;
 
-        while(ptr!=null){
+        while(ptr != null){
+
             if(ptr.val < x){
-                l.next = ptr;
-                l = l.next;
+                less.next = ptr;
+                less = less.next;
             }
             else{
-                h.next = ptr;
-                h = h.next;
+                 more.next = ptr;
+                 more = more.next;
+                 
             }
 
             ptr = ptr.next;
         }
 
-        l.next = null;
-        h.next = null;
+        less.next = chead2.next;
+        more.next = null;
 
-        l.next = h_head.next;
-
-        return l_head.next;
+        return chead1.next;
     }
 }
