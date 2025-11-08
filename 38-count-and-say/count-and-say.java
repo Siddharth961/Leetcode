@@ -1,70 +1,37 @@
 class Solution {
     public String countAndSay(int n) {
-        // return helper(n).toString();
+        if(n == 1) return "1";
 
-        StringBuilder prev = new StringBuilder();
-        prev.append('1');
-        StringBuilder curr = new StringBuilder();
-
-        for (int i = 2; i <= n; i++) {
-
-            int count = 1;
-            int j = 1;
-            for (; j < prev.length(); j++) {
-
-                if (prev.charAt(j - 1) != prev.charAt(j)) {
-
-                    curr.append(count);
-                    curr.append(prev.charAt(j - 1));
-                    count = 1;
-                }
-
-                else
-                    count++;
-            }
-
-            curr.append(count);
-            curr.append(prev.charAt(j - 1));
-
-            prev = curr;
-            curr = new StringBuilder();
-
-        }
-
-        return prev.toString();
-    }
-
-    public StringBuilder helper(int n) {
-
-        if (n == 1) {
-            StringBuilder sb = new StringBuilder();
-            sb.append('1');
-            return sb;
-        }
-
-        StringBuilder s = helper(n - 1);
+        String s = countAndSay(n-1);
+        if(n == 4) System.out.println(s);
 
         StringBuilder sb = new StringBuilder();
 
         int count = 1;
-        int i = 1;
-        for (; i < s.length(); i++) {
 
-            if (s.charAt(i - 1) != s.charAt(i)) {
+        
 
-                sb.append(count);
-                sb.append(s.charAt(i - 1));
-                count = 1;
+        for(int i=1; i<s.length() ; i++){
+            if( s.charAt(i-1) != s.charAt(i) ){
+                sb.append( count );
+                sb.append( s.charAt(i-1) );
+                count = 0;
+
             }
 
-            else
-                count++;
+            count++;
         }
 
-        sb.append(count);
-        sb.append(s.charAt(i - 1));
+         if(n == 4)System.out.println(sb);
 
-        return sb;
+        // count++;
+
+        sb.append( count );
+        sb.append( s.charAt(s.length() - 1) );
+
+        return sb.toString();
 
     }
+
+
 }
