@@ -3,7 +3,6 @@ class Solution {
         if(n == 1) return "1";
 
         String s = countAndSay(n-1);
-        if(n == 4) System.out.println(s);
 
         StringBuilder sb = new StringBuilder();
 
@@ -21,8 +20,6 @@ class Solution {
 
             count++;
         }
-
-         if(n == 4)System.out.println(sb);
 
         // count++;
 
