@@ -10,35 +10,48 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
+
         if(head == null || head.next == null) return head;
-        ListNode i = head;
-        ListNode j = head;
+        
+        // we need size to get correct k value
+        // while doing so we will also store the tail of current list
 
+        ListNode ptr = head;
         int size = 0;
+        ListNode tail = null;
 
-        while(i != null){
-            i = i.next;
-            size++;                                                         
+        while(ptr != null){
+            size++;
+            if(ptr.next == null){
+                tail = ptr;
+            }
+            ptr = ptr.next;
+
         }
 
         k = k % size;
-        i = head;
 
-        while(k>0){
+        if(k == 0) return head;
+
+        ListNode i = head;
+        ListNode j = head;
+
+        while(k > 0){
             j = j.next;
             k--;
-
         }
 
-        while( j.next != null){
+
+        while(j.next != null){
             i = i.next;
             j = j.next;
         }
+        // System.out.println(i.val + " " + j.val);
 
-        j.next = head;
-        head = i.next;
+        ListNode nhead = i.next;
         i.next = null;
+        tail.next = head;
 
-        return head;
+        return nhead;
     }
 }
