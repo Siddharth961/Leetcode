@@ -17,10 +17,13 @@ class Solution {
             return ;
         }
 
-        get_ans(curr+1, n, k, list);
 
-        list.add(curr);
-        get_ans(curr+1, n, k, list);
-        list.remove(list.size()-1);
+        for(int i=curr; i<=n; i++){
+
+            list.add(i);
+            get_ans(i+1, n, k, list);
+            list.remove(list.size()-1);
+        }
+
     }
 }
