@@ -9,30 +9,29 @@ class Solution {
 
         int ans=0;
 
-        // for(int val : nums){
 
-        //     int len = 0;
-        //     int i = val;
-        //     while(st.contains(i)){
-                
-        //         if( looked.containsKey(i) ){
-        //             len = looked.get(i);
-        //             break;
-        //         }
-
-        //         len++;
-        //         i++;
-        //     }
-
-        //     looked.put(val, len);
+        // for(int i : st){
+        //     int len =  get_ans(i, st);         
 
         //     ans = Math.max(ans, len);
         // }
 
-        for(int i : st){
-            int len =  get_ans(i, st);         
+        //  -------------- START OF SEQUENCE APPROACH -----------------
+        // - we only calculate the length of sequence with number x only and only if we are sure x is the START of the sequence, i.e there is NO x-1 element
 
-            ans = Math.max(ans, len);
+        for(int i : st){
+
+            if( !st.contains(i-1) ){
+                int len = 0;
+                int val = i;
+
+                while( st.contains(val)){
+                    len++;
+                    val++;
+                }
+
+                ans = Math.max(ans, len);
+            }
         }
 
         return ans;
