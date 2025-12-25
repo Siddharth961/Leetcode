@@ -1,33 +1,50 @@
 class Solution {
-    List<Integer>al = new ArrayList<>();
-
     public List<Integer> eventualSafeNodes(int[][] graph) {
+
+        int n = graph.length;
         
-        int[]safe = new int[graph.length];
-        
-        for(int i=0; i<graph.length; i++){
-            get_ans(graph, i, safe);
+        List<Integer>[]rev_graph = new LinkedList[n];
+        int[]outgoing = new int[n];
+
+        for(int i=0; i<n; i++) rev_graph[i] = new LinkedList<>();
+
+        for(int i=0; i<n; i++){
+            for(int j : graph[i]){
+
+                rev_graph[j].add(i);
+            }
+
+            outgoing[i] = graph[i].length;
         }
 
-        Collections.sort(al);
+        // for(var ll : rev_graph) System.out.println(ll);
 
-        return al;
-    }
+        Queue<Integer> q = new LinkedList<>(); // will only contain terminal nodes
 
-    public void get_ans(int[][]graph, int src, int[]safe){
-
-        if(safe[src] != 0 ) return;
-
-        safe[src] = 2;
-
-        int ans = 1;
-        for(int i : graph[src]){
-            get_ans(graph, i, safe);
-            ans = safe[i];
-            if(ans == 2) break;
+        for(int i=0; i<n; i++){
+            if(outgoing[i] == 0) q.add(i);
         }
 
-        safe[src] = ans;
-        if(ans==1) al.add(src);
+
+
+        while(q.size() > 0){
+            int node = q.remove();
+
+            // now minus the connection from other nodes to this node
+            for(int neig : rev_graph[node]){
+                outgoing[neig]--;
+
+                if(outgoing[neig] == 0) q.add(neig);
+                //since elements are added only after verifying they are terminal nodes ( no outgoing ), there wont be repeated elements in queue
+            }
+        }
+
+        List<Integer>ans = new LinkedList<>();
+
+        for(int i=0; i<n; i++){
+            if(outgoing[i] == 0) ans.add(i);
+        }
+
+        return ans;
     }
 }
