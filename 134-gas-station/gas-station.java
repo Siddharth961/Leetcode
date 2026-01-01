@@ -1,33 +1,36 @@
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         
-        int total_gas = 0;
-        int total_cost = 0;
+        int tank = 0;
+        int i=0;
+        int j=0;
+        int n = gas.length;
 
-        for(int i=0; i<gas.length; i++){
-            total_gas += gas[i];
-            total_cost += cost[i];
-        }
+        while(j < 2*n - 1){
+            // System.out.print( i + " " + j + " " + " " + tank + " " );
+            tank += gas[j%n] - cost[j%n];
 
-        if(total_cost > total_gas) return -1;
+            // if tank >= 0 we can reach j + 1..else no in thsat case we restart
 
-        int ans = 0;
-        int curr_gas = 0;
-
-        for(int i = 0; i<gas.length; i++){
-
-
-            if(curr_gas < 0){
-                ans = i;
-                curr_gas = 0;
+            if(tank < 0){
+                tank = 0;
+                i = j+1; // we start from next stop
             }
+            else{
 
-            curr_gas += gas[i] - cost[i];
-            
+                // we can start from i and reach j+1..now just check if we covered them all
 
-            
+                // System.out.print( ((j+1) - i  ));
+                if( ((j+1) - i  )  == n) return i;
+
+            }
+                // System.out.println( );
+
+
+            j++;
+
         }
 
-        return ans;
+        return -1;
     }
 }
