@@ -1,34 +1,39 @@
 class Solution {
-    List<List<Integer>> ans = new ArrayList<>();
-    
-    public List<List<Integer>> combinationSum2(int[] candi, int tar) {
-        Arrays.sort(candi);
-        List<Integer> al = new ArrayList<>();
+    List<List<Integer>> ans = new LinkedList<>();
+    HashSet<String> st = new HashSet<>();
 
-        sol(0, candi, tar,0, al);
-
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        get_ans(0, new LinkedList<>(), target, candidates);
 
         return ans;
     }
 
-    public void sol (int idx, int[]candi, int tar, int ssf, List<Integer> al){
-        if(ssf==tar){
-            List<Integer> temp = new ArrayList<>(al);
-            ans.add(temp);
-            return;
-        }
-        if(ssf>tar) return;
+    public void get_ans(int idx, List<Integer> list, int tar, int[]nums){
 
-        int prev = -1;
+        if(tar == 0){
+            // String s = list.toString();
 
-        for(int i=idx; i<candi.length; i++){
-            if(prev==candi[i]) continue;
-            al.add(candi[i]);
-            sol(i+1, candi, tar, ssf + candi[i], al);
-            al.remove(al.size()-1);
-            prev = candi[i];
+            // if(!st.contains(s)){
+            //     st.add(s);
+            // }
+                ans.add( new LinkedList<>(list) );
+
+                return;
         }
 
+        if(idx == nums.length || tar < 0) return;
+
+
+        list.add(nums[idx]);
+        get_ans(idx+1, list, tar - nums[idx], nums);
+        list.remove(list.size()-1);
+
+        int i = idx;
+
+        while(i < nums.length && nums[i] == nums[idx]) i++;
+
+        get_ans(i, list, tar , nums);
 
     }
 }
