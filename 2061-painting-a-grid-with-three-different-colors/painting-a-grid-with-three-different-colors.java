@@ -5,7 +5,7 @@ class Solution {
         List<String> possible_columns = new ArrayList<>();
         get_states(new StringBuilder(), new char[]{'R', 'G', 'B'}, m, possible_columns);
 
-        HashMap<String , Integer> dp = new HashMap<>();
+        HashMap<Integer , HashMap<String, Integer> > dp = new HashMap<>();
 
         // System.out.println(possible_columns);
 
@@ -35,15 +35,19 @@ class Solution {
 
     }
 
-    public int get_ans(String prev_column, int curr, int total_column, List<String> choices,  HashMap<String , Integer> dp){
+    public int get_ans(String prev_column, int curr, int total_column, List<String> choices,  HashMap<Integer , HashMap<String, Integer>>  dp){
 
         if( curr == total_column ){
             return 1;
         }
 
-        String key = prev_column + curr;
+        if(dp.containsKey( curr )){
+            var mp = dp.get(curr);
 
-        if(dp.containsKey( key )) return dp.get(key);
+            if( mp.containsKey(prev_column) ) return mp.get(prev_column);
+        }
+
+        
 
         int ans = 0;
         for(String s : choices){
@@ -62,7 +66,9 @@ class Solution {
             }
         }
 
-        dp.put(key, ans);
+        if(!dp.containsKey(curr)) dp.put(curr, new HashMap<>() );
+
+        dp.get(curr).put( prev_column, ans);
 
         return ans;
     }
