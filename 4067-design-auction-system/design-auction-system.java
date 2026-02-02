@@ -24,16 +24,13 @@ class AuctionSystem {
 
         HashMap<Integer, Integer> mp = bid_store.get(itemId); // gets bid list of itemId
 
-        if( mp.containsKey(userId) ){
-            // user only needs to UPDATE his bid
-            updateBid(userId, itemId, bidAmount);
-        }
-        else{
+        
+    
 
             mp.put( userId, bidAmount);
             
             highest_bid.get(itemId).add( new Pair(bidAmount, userId) ); // adding bid to corresponding pq 
-        }
+        
     }
     
     public void updateBid(int userId, int itemId, int newAmount) {
