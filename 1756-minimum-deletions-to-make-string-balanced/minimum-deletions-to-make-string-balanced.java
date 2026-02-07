@@ -1,29 +1,32 @@
 class Solution {
     public int minimumDeletions(String s) {
-        char[]arr = s.toCharArray();
+
+        int n = s.length();
         
-        int[]pre_b = new int[arr.length];
-        int[]suf_a = new int[arr.length];
+        int[]pre_a = new int[n];
+        int[]suf_b = new int[n];
 
-        int prefix = 0;
+        for(int i=0; i<n; i++){
 
-        for(int i=0; i<arr.length; i++){
-            pre_b[i] = prefix;
-            prefix += arr[i] - 'a';
+            if(i > 0) pre_a[i] = pre_a[i-1];
+
+            if(s.charAt(i)=='a')pre_a[i]++;
         }
 
-        prefix = 0;
+        for(int i=n-1; i>=0; i--){
 
-        for(int i=arr.length-1; i>=0; i--){
-            suf_a[i] = prefix;
-            if(arr[i]=='a') prefix ++;
+            if(i < n-1) suf_b[i] = suf_b[i+1];
+
+            if(s.charAt(i)=='b')suf_b[i]++;
         }
 
-        int min = arr.length;
-        for(int i=0; i<arr.length; i++){
-            min = Math.min(pre_b[i]+suf_a[i], min);
+        int val = 0;
+
+        for(int i=0; i<n; i++){
+
+            val = Math.max(val, pre_a[i] + suf_b[i]);
         }
 
-        return min;
+        return n - val;
     }
 }
