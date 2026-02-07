@@ -28,10 +28,10 @@ class Solution {
 
         for(int i=0; i<n; i++){
 
-            sum += dp[i][ group[i] ];
+            sum += dp[i][ group[i] ]/2.0;
         }
 
-        return (long)sum/2;
+        return (long)sum;
     }
 
     // this function will give an array which will hold total distance of all nodes per group
