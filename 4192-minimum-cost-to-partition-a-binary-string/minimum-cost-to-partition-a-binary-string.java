@@ -1,5 +1,17 @@
 class Solution {
+    int[]pre ;
     public long minCost(String s, int encCost, int flatCost) {
+        pre = new int[s.length() +1];
+
+        int idx = 1;
+        for(int i=0; i<s.length(); i++){
+            pre[idx] = pre[idx-1];
+            if(s.charAt(i) == '1') pre[idx]++;
+
+            idx++;
+        }
+        
+
         return calc(0, s.length()-1, s, encCost, flatCost);
     }
 
@@ -7,17 +19,17 @@ class Solution {
 
         long cost = 0;
 
-        int ones = 0;
+        int ones = pre[en+1] - pre[st];
 
         int len = en-st+1;
         int mid = (st + en) / 2;
 
-        for(int i=st; i<=en; i++){
-            if(s.charAt(i) == '1'){
+        // for(int i=st; i<=en; i++){
+        //     if(s.charAt(i) == '1'){
 
-                ones++;
-            }
-        }
+        //         ones++;
+        //     }
+        // }
 
         if(ones != 0){
             // only split if there is atleast single 1 otherwise both splits will still have all zeroes only
