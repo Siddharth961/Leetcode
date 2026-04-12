@@ -32,11 +32,13 @@ class Solution {
 
         if(val == 1) return false;
 
-        
+        if(primes.contains(val)) return true;
 
         for(int i=2; i*i <= val; i++){
             if(val % i == 0) return false;
         }
+
+        primes.add(val);
 
         return true;
     }
