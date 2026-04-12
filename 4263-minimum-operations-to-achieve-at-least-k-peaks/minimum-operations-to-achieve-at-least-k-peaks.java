@@ -63,10 +63,14 @@ class Solution {
 
                 // making this element a peak
 
-                int prev = 0;
+                int prev = Integer.MAX_VALUE;
 
                 if(i >= 2)prev = dp[i-2][j-1]; // cost of making j-1 peak among i-2 elements..since cant make consecutive peaks
-                else prev = dp[0][j-1];
+                else if(j==1){
+                    // prev = dp[0][j-1];
+                    prev = 0;
+                    // System.out.println(prev + " "+j);
+                }
 
                 int take = 0;
 
