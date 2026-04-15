@@ -8,7 +8,7 @@ class Solution {
             if(words[i].equals(target) ){
 
                 int a = Math.abs(i - startIndex);
-                int b = (words.length - i) + startIndex;
+                int b = (words.length - i) + startIndex; 
                 int c = i + (words.length - startIndex);
 
                 ans = Math.min(ans , Math.min(a, Math.min(b, c)));
