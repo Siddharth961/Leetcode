@@ -48,10 +48,7 @@ class Solution {
         Queue<Integer> q = new LinkedList<>();
 
         // add any node in queue
-        if(root == -1){
-            System.out.println(mask);
-            return false;
-        }
+        
         q.add(root);
 
         while(q.size() > 0){
