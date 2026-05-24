@@ -33,7 +33,7 @@ class Solution {
                     grid[re][i] = grid[re][i-1];
                 }
 
-                for(int i=re; i>rs; i--){
+                for(int i=re; i>(rs+1); i--){
                     grid[i][cs] = grid[i-1][cs];
                 }
 
