@@ -37,7 +37,7 @@ class Solution {
                     grid[i][cs] = grid[i-1][cs];
                 }
 
-                grid[rs+1][cs] = temp;
+                grid[rs+1][cs] = temp; // actual value of [rs+1][cs] should be [rs][cs]
 
                 r--;
 
