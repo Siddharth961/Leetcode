@@ -1,43 +1,33 @@
 class Solution {
     public int[] maxValue(int[] nums) {
+
         int n = nums.length;
 
-        int[]max_left = new int[n];
-
-        int max = 0;
-        for(int i=0; i<n; i++){
-            max = Math.max(max, nums[i]);
-
-            max_left[i] = max;
-        }
-
-        int[]min_right = new int[n];
-
-        int min = nums[n-1];
-        for(int i=n-1; i>=0; i--){
-            min = Math.min(min, nums[i]);
-
-            min_right[i] = min;
-        }
-
-
+        int[]max = new int[n];
         int[]ans = new int[n];
 
-        ans[n-1] = max_left[n-1];
+        max[0] = nums[0];
 
-        for(int i=n-2; i>=0; i--){
+        for(int i=1; i<n; i++){
+            max[i] = Math.max(max[i-1], nums[i]);
+        }
 
-            ans[i] = max_left[i];
+        int min = nums[n-1];
 
+        for(int i=n-1; i>=0; i--){
 
-            if(max_left[i] > min_right[i+1]) ans[i] = ans[i+1];
+            // only if min on right is LESS than max of left then we can jump there and take ongoing max value
+            // otherwise i can only take values from left side
+
+            if(max[i] > min && i != n-1){
+                ans[i] = ans[i+1];
+            }
+            ans[i] = Math.max( ans[i], max[i] );
+
+            min = Math.min(min, nums[i]);
         }
 
         return ans;
-
-        
         
     }
-
-    
 }
