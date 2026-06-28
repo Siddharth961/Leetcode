@@ -30,7 +30,6 @@ class Solution {
         while(k > 0){
 
             int[]arr = pq.remove();
-            System.out.println(arr[0] + " " + arr[1] + " " + arr[2]);
             ans += arr[0];
             k--;
 
