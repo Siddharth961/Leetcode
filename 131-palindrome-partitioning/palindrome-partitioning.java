@@ -1,59 +1,45 @@
 class Solution {
-
-    List<List<String>> ans = new ArrayList();
-    List<String> al = new ArrayList();
-
+    List<List<String>> ans = new ArrayList<>();
     public List<List<String>> partition(String s) {
-        get_ans("", s);
+        travel(0, s, new ArrayList<>());
         return ans;
     }
 
-    public void get_ans( String left, String right){
+    public void travel(int idx, String s, List<String>ssf ){
 
-        
 
-        if( check(left)==false ) return;
-
-        if(right.length()==0){
-
-            al.add(left);
-
-      
-            ans.add( new ArrayList<>(al) );
-
-            al.remove(al.size()-1);
+        if(idx == s.length()){
+            ans.add( new ArrayList<>(ssf) );
             return;
         }
 
-        if(left.length()>0) al.add(left);
+        for(int end = idx; end < s.length(); end++){
+            String part = s.substring(idx, end+1);
 
-        for(int i=0; i<right.length(); i++){
+            if( (isPalindrome(part)) ){
 
-            String l = right.substring(0, i+1);
-            String r = right.substring(i+1, right.length());
-            
-            get_ans(l, r);
+                // valid partition
 
+                ssf.add(part);
+                travel(end+1, s, ssf);
+                ssf.remove( ssf.size() - 1);
+            }
         }
 
-        if(al.size()>0) al.remove(al.size()-1);
     }
 
-    public boolean check(String s){
-        if(s.length()==0) return true;
+    public boolean isPalindrome(String s){
 
-        char[]arr =s.toCharArray();
+        int i = 0;
+        int j = s.length() - 1;
 
-        int i=0;
-        int j=arr.length-1;
+        while(i < j){
+            if(s.charAt(i) != s.charAt(j)) return false;
 
-        while(i<=j){
-            if(arr[i] != arr[j]) return false;
             i++;
             j--;
         }
 
         return true;
-
     }
 }
