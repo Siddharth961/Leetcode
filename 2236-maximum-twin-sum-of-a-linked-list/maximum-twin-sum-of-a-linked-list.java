@@ -11,39 +11,27 @@
 class Solution {
     public int pairSum(ListNode head) {
 
-        if(head.next.next==null) return head.val + head.next.val;
-        
-        ListNode i = head;
-        ListNode j = head;
+        Stack<Integer> st = new Stack<>();
 
-        while(j!=null&& j.next!=null){
-            i = i.next;
-            j = j.next.next;
+        ListNode ptr = head;
+        int size = 0;
+
+        while(ptr != null){
+            st.push(ptr.val);
+            size++;
+
+            ptr = ptr.next;
         }
 
-        j = i.next;
-        i.next = null;
-        ListNode temp = j.next;
+        ptr = head;
+        int ans = 0;
 
-        while(temp!=null){
-            j.next = i;
-            i = j;
-            j = temp;
-            temp = temp.next;
+        while(st.size() > size/2){
+
+            ans = Math.max(ans, ptr.val + st.pop() );
+            ptr = ptr.next;
         }
 
-        j.next = i;
-
-        i = head;
-
-        int max = -1;
-        System.out.print(i.val + " " + j.val);
-
-        while(j!=null){
-            if((i.val+j.val)>max)max = i.val+j.val;
-            i = i.next;
-            j = j.next;
-        }
-        return max;
+        return ans;        
     }
 }
