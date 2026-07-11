@@ -28,8 +28,8 @@ class Solution {
         prev_idx = n;
         prev_height = last_max_height;
 
-        for(int[]arr : restrictions) System.out.println(arr[0] + " "+ arr[1]);
-        System.out.println(n + " " + last_max_height);
+        // for(int[]arr : restrictions) System.out.println(arr[0] + " "+ arr[1]);
+        // System.out.println(n + " " + last_max_height);
 
         for(int i=restrictions.length-1; i>=0; i--){
             int[]arr = restrictions[i];
@@ -43,8 +43,8 @@ class Solution {
             prev_height = arr[1];
         }
 
-        for(int[]arr : restrictions) System.out.println(arr[0] + " "+ arr[1]);
-        System.out.println(n + " " + last_max_height);
+        // for(int[]arr : restrictions) System.out.println(arr[0] + " "+ arr[1]);
+        // System.out.println(n + " " + last_max_height);
 
         int ans = 0;
 
@@ -67,7 +67,7 @@ class Solution {
             prev_height = arr[1];
         }
 
-        System.out.println(ans);
+        // System.out.println(ans);
 
         // for nth space
 
