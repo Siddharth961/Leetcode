@@ -4,7 +4,7 @@ class Solution {
         for(String s : patterns){
             int val = search(s, word);
             if(val == 1){
-                System.out.println(s);
+                // System.out.println(s);
                 ans++;
             }
         }
