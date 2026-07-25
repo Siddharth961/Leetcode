@@ -1,57 +1,66 @@
 class Solution {
-    public int[] sumAndMultiply(String s, int[][] queries) {
+    public int[] sumAndMultiply(String str, int[][] queries) {
+
+        int n = str.length();
+        int modulo = 1_000_000_007;
         
-        long mod = 1000000007;
-        int n = s.length();
+        int[]conc_val = new int[n];
+        int[]sum = new int[n];
+        int[]digits = new int[n];
 
-        int[]idx = new int[n+1];
-        long[]val = new long[n+1];
-        long[]sum = new long[n+1];
-        long[]pow10 = new long[n+1];
+        int conc = 0;
+        int s = 0;
+        int d = 0;
 
-        pow10[0] = 1;
-        for(int i=1; i<=n; i++) pow10[i] = (pow10[i-1]*10)%mod;
+        for(int i=0; i<str.length(); i++){
 
-        int c=0;
+            int val = str.charAt(i) - '0';
 
-        for(int i=0; i<n; i++){
-            int d = s.charAt(i) - '0' ;
-
-            if( d != 0){
-                c++;
-                val[c] = (val[c-1]*10 + d) % mod;
-                sum[c] = (sum[c-1] + d) % mod;
+            if(val != 0){
                 
+                conc = (int)((conc * 10L + val) % modulo);
+                s = (s + val) % modulo;
+                d++;
             }
 
-            idx[i+1] = c;
+            conc_val[i] = conc;
+            sum[i] = s;
+            digits[i] = d;
         }
-        
-        int m = queries.length;
-        int[] ans = new int[m];
 
-        for (int i = 0; i < m; i++) {
-            int l = queries[i][0];
-            int r = queries[i][1];
 
-            int a = idx[l];
-            int b = idx[r+1];
+        long[] pow10 = new long[d + 1];
+        pow10[0] = 1;
 
-            if(a == b){
-                ans[i] = 0;
-                continue;
+        for (int i = 1; i <= d; i++) {
+            pow10[i] = (pow10[i - 1] * 10) % modulo;
+        }
+
+        int[]ans = new int[queries.length];
+
+        int idx = 0;
+        for(int[]q : queries){
+
+            int l = q[0] - 1;
+            int r = q[1];
+            
+            if(l < 0){
+                ans[idx] = (int)( (conc_val[r] * 1L * sum[r]) % modulo );
+            }
+            else{
+
+                long pow = pow10[digits[r] - digits[l]];
+
+                long conc_q = (conc_val[r] - (conc_val[l] * pow) % modulo + modulo) % modulo;
+
+                long sum_q = (sum[r] - sum[l] + modulo) % modulo;
+
+                ans[idx] = (int)((conc_q * sum_q) % modulo);
             }
 
-            int len = b-a;
-
-            long num =( val[b] - ( val[a] * pow10[len] ) % mod + mod) % mod;
-            long mult = sum[b] - sum[a];
-
-            ans[i] = (int)( (num * mult) % mod);
-
+            idx++;
         }
 
         return ans;
-
     }
 }
