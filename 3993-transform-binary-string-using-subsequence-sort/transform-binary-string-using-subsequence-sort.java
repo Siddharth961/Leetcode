@@ -8,10 +8,10 @@ class Solution {
         for(int i=0; i<ans.length; i++){
             // dp = new int[s.length()];
             // Arrays.fill(dp, -1);
-            if(i==0){
-                debug = true;
-                System.out.println(strs[i]);
-            }
+            // if(i==0){
+            //     debug = true;
+            //     System.out.println(strs[i]);
+            // }
             ans[i] = get_ans( s.toCharArray(), strs[i].toCharArray());
         }
 
