@@ -1,4 +1,14 @@
 class Solution {
+    // final tc
+    
+    // prime list making -> n*log(logn)
+    // with n -> 1000 primes list will go only to 169
+
+    // primes list size -> Ps
+    // dp -> Ps * s * Ps ( dp params are n * s only but internally creating a hard copy causes n too)
+    // so -> n*log(logn) + Ps * s * Ps 
+    // 1000 * (~200) * 1000 & (~200) -> 10^7
+
     public List<Integer> maxPrimeSubset(int n, int s) {
 
         boolean[]prime = new boolean[n+1];
@@ -30,12 +40,11 @@ class Solution {
 
     }
 
-    // i 168
-    // lsf size - 168
-    // ssf - 1000
-    // first element - 1000
+    // from constraints
+    // n can go to 1000
+    // up to 1000 there are 169 primes so our primes_list will have size of 169 only
 
-    Data[][]dp = new Data[169][1001]; 
+    Data[][]dp = new Data[169][1001]; // [i, s]
 
     public Data get_ans(int i, int s, List<Integer> prime_list){
 
